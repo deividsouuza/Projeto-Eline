@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estância como laboratório vivo</title>
+<meta name="description" content="Projeto escolar de pesquisa de campo em Estância: trilhas, patrimônio local, videoteca escolar e protagonismo discente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   IDENTIDADE VISUAL — Estância Laboratório Vivo
+   Amarelo = cor de destaque | Azul escuro = cor secundária
+   ============================================================ */
+:root{
+  /* Amarelos */
+  --amarelo:        #F2C94C;
+  --amarelo-forte:  #E0B02F;
+  --amarelo-claro:  #FDF4DC;
+  --amarelo-vidro:  #FBE9B8;
+  --ambar-texto:    #7A5406;  /* amarelo escurecido, usado só em TEXTO sobre fundo claro */
+
+  /* Azuis (secundária / contraste) */
+  --azul:           #12314F;
+  --azul-escuro:    #0C2136;
+  --azul-medio:     #234A6E;
+
+  /* Neutros */
+  --branco:         #FFFFFF;
+  --cinza-fundo:    #F5F6F8;
+  --cinza-borda:    #E4E7EC;
+  --texto:          #2B3440;
+  --texto-suave:    #5A6675;
+
+  /* Sistema */
+  --raio:      16px;
+  --raio-sm:   10px;
+  --sombra:    0 1px 2px rgba(12,33,54,.04), 0 8px 24px rgba(12,33,54,.06);
+  --sombra-md: 0 4px 10px rgba(12,33,54,.07), 0 16px 40px rgba(12,33,54,.10);
+  --sidebar-w: 276px;
+  --topbar-h:  64px;
+  --fonte: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:24px}
+body{
+  margin:0;
+  font-family:var(--fonte);
+  background:var(--cinza-fundo);
+  color:var(--texto);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; height:auto; display:block}
+a{color:inherit}
+h1,h2,h3{color:var(--azul); line-height:1.2; margin:0}
+p{margin:0}
+ul{margin:0; padding:0; list-style:none}
+
+/* Acessibilidade -------------------------------------------------- */
+.pular-para-conteudo{
+  position:absolute; left:12px; top:-100px; z-index:200;
+  background:var(--amarelo); color:var(--azul-escuro);
+  padding:12px 18px; border-radius:var(--raio-sm); font-weight:700;
+  transition:top .18s ease;
+}
+.pular-para-conteudo:focus{top:12px}
+:focus-visible{outline:3px solid var(--amarelo-forte); outline-offset:3px; border-radius:6px}
+.hero :focus-visible,.rodape :focus-visible{outline-color:var(--amarelo)}
+
+/* ============================================================
+   BARRA SUPERIOR (somente tablet/celular)
+   ============================================================ */
+.topbar{
+  display:none;
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  height:var(--topbar-h);
+  align-items:center; gap:12px;
+  padding:0 16px;
+  background:var(--branco);
+  border-bottom:1px solid var(--cinza-borda);
+  box-shadow:0 2px 10px rgba(12,33,54,.05);
+}
+.botao-menu{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-width:48px; min-height:44px; padding:0 12px;
+  background:var(--amarelo-claro);
+  border:1px solid var(--amarelo-vidro);
+  border-radius:var(--raio-sm);
+  color:var(--azul); font:inherit; font-weight:600; cursor:pointer;
+}
+.botao-menu:hover{background:var(--amarelo-vidro)}
+.botao-menu svg{width:20px; height:20px}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar{
+  position:fixed; inset:0 auto 0 0; z-index:70;
+  width:var(--sidebar-w);
+  display:flex; flex-direction:column;
+  background:var(--branco);
+  border-right:1px solid var(--cinza-borda);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+/* Faixa amarela de identidade no topo da sidebar */
+.sidebar::before{
+  content:""; position:sticky; top:0; display:block;
+  height:4px; flex:none;
+  background:linear-gradient(90deg,var(--amarelo) 0%,var(--amarelo-forte) 100%);
+}
+
+.marca{
+  display:flex; align-items:center; gap:12px;
+  padding:20px 20px 18px;
+  text-decoration:none;
+}
+.marca-logo{
+  flex:none;
+  width:44px; height:44px;
+  display:grid; place-items:center;
+  background:var(--amarelo);
+  color:var(--azul-escuro);
+  border-radius:13px;
+  font-weight:800; font-size:20px;
+  box-shadow:0 4px 12px rgba(224,176,47,.35);
+}
+.marca-nome{display:block; font-size:17px; font-weight:800; color:var(--azul); letter-spacing:-.2px}
+.marca-sub{display:block; font-size:12.5px; color:var(--texto-suave); letter-spacing:.02em}
+.topbar .marca-nome{font-size:15.5px}
+
+.nav{padding:4px 12px 8px}
+.nav a{
+  display:block;
+  padding:11px 14px;
+  margin-bottom:2px;
+  border-left:3px solid transparent;
+  border-radius:8px;
+  color:var(--texto);
+  text-decoration:none;
+  font-size:15px; font-weight:500;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.nav a:hover{background:var(--cinza-fundo); color:var(--azul)}
+.nav a[aria-current="page"]{
+  background:var(--amarelo-claro);
+  border-left-color:var(--amarelo-forte);
+  color:var(--azul);
+  font-weight:700;
+}
+
+.bloco-trilhas{
+  margin:10px 20px 0;
+  padding:16px 0 4px;
+  border-top:1px solid var(--cinza-borda);
+}
+.bloco-titulo{
+  font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
+  color:var(--ambar-texto);
+  margin-bottom:10px;
+}
+.lista-trilhas li{
+  display:flex; align-items:center; gap:9px;
+  padding:5px 0;
+  font-size:14px; color:var(--texto-suave);
+}
+.lista-trilhas li::before{
+  content:""; flex:none;
+  width:8px; height:8px; border-radius:50%;
+  background:var(--amarelo); border:1px solid var(--amarelo-forte);
+}
+
+.rodape-sidebar{
+  margin-top:auto;
+  padding:18px 20px 22px;
+  border-top:1px solid var(--cinza-borda);
+}
+.link-instagram{
+  display:inline-flex; align-items:center; gap:10px;
+  min-height:44px; padding:9px 14px 9px 10px;
+  background:var(--amarelo-claro);
+  border:1px solid var(--amarelo-vidro);
+  border-radius:999px;
+  color:var(--azul); text-decoration:none;
+  font-size:14px; font-weight:600;
+  transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.link-instagram svg{width:22px; height:22px; flex:none}
+.link-instagram:hover{
+  background:var(--amarelo);
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(224,176,47,.32);
+}
+.link-instagram[aria-disabled="true"]{opacity:.75; cursor:not-allowed}
+.link-instagram[aria-disabled="true"]:hover{transform:none; box-shadow:none; background:var(--amarelo-claro)}
+
+/* Overlay do menu no celular */
+.overlay{
+  position:fixed; inset:0; z-index:65;
+  background:rgba(12,33,54,.45);
+  opacity:0; visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease;
+}
+
+/* ============================================================
+   CONTEÚDO PRINCIPAL
+   ============================================================ */
+.conteudo{
+  margin-left:var(--sidebar-w);
+  padding:32px clamp(16px,4vw,44px) 56px;
+}
+.container{max-width:1080px; margin:0 auto}
+
+/* Hero ------------------------------------------------------------ */
+.hero{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,var(--azul) 0%,var(--azul-escuro) 100%);
+  border-radius:22px;
+  padding:clamp(32px,5vw,60px);
+  color:#EAF1F8;
+  box-shadow:var(--sombra-md);
+}
+.hero::after{ /* círculo decorativo amarelo */
+  content:""; position:absolute; z-index:0;
+  right:-52px; top:50%; transform:translateY(-50%);
+  width:min(232px,29vw); aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,var(--amarelo) 0%,var(--amarelo-forte) 62%,#C08F1B 100%);
+}
+.hero::before{ /* anel externo do círculo decorativo */
+  content:""; position:absolute; z-index:0;
+  right:-124px; top:50%; transform:translateY(-50%);
+  width:min(400px,50vw); aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(242,201,76,.30);
+}
+.hero-texto{position:relative; z-index:1; max-width:min(600px,100%)}
+.hero-etiqueta{
+  display:inline-block;
+  padding:6px 14px; margin-bottom:18px;
+  background:rgba(242,201,76,.16);
+  border:1px solid rgba(242,201,76,.45);
+  border-radius:999px;
+  color:var(--amarelo);
+  font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+}
+.hero h1{
+  color:var(--branco);
+  font-size:clamp(30px,4.6vw,48px);
+  font-weight:800; letter-spacing:-1px;
+  margin-bottom:16px;
+}
+.hero h1 span{color:var(--amarelo); display:block}
+.hero p{font-size:clamp(15px,1.6vw,17.5px); color:#C6D5E4; max-width:44ch}
+.hero-botoes{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:48px; padding:0 26px;
+  border-radius:var(--raio-sm);
+  font-size:15px; font-weight:700; text-decoration:none;
+  border:2px solid transparent; cursor:pointer;
+  transition:background .16s ease, transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.btn-primario{
+  background:var(--amarelo); color:var(--azul-escuro);
+  box-shadow:0 6px 18px rgba(242,201,76,.28);
+}
+.btn-primario:hover{background:var(--amarelo-forte); transform:translateY(-2px)}
+.btn-secundario{background:transparent; color:var(--branco); border-color:rgba(255,255,255,.55)}
+.btn-secundario:hover{border-color:var(--amarelo); color:var(--amarelo)}
+
+/* Seções ----------------------------------------------------------- */
+.secao{padding-top:56px}
+.secao-cabecalho{margin-bottom:24px; max-width:70ch}
+.secao h2{font-size:clamp(22px,2.6vw,29px); font-weight:800; letter-spacing:-.5px}
+.secao h2::after{ /* detalhe amarelo sob o título */
+  content:""; display:block;
+  width:46px; height:4px; margin-top:12px;
+  background:var(--amarelo); border-radius:2px;
+}
+.secao-cabecalho p{margin-top:14px; color:var(--texto-suave); font-size:15.5px}
+
+/* Grid de cards ---------------------------------------------------- */
+.grid-cards{
+  display:grid; gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(248px,1fr));
+}
+.card{
+  display:flex; flex-direction:column;
+  padding:24px;
+  background:var(--branco);
+  border:1px solid var(--cinza-borda);
+  border-radius:var(--raio);
+  box-shadow:var(--sombra);
+  text-decoration:none;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--sombra-md);
+  border-color:var(--amarelo-vidro);
+}
+.card-icone{
+  width:46px; height:46px; margin-bottom:16px;
+  display:grid; place-items:center;
+  background:var(--amarelo-claro);
+  border:1px solid var(--amarelo-vidro);
+  border-radius:13px;
+  color:var(--azul);
+}
+.card:hover .card-icone{background:var(--amarelo); border-color:var(--amarelo-forte)}
+.card-icone svg{width:22px; height:22px}
+.card h3{font-size:17px; font-weight:700; margin-bottom:8px}
+.card p{font-size:14.5px; color:var(--texto-suave)}
+.card-seta{
+  margin-top:16px;
+  font-size:13.5px; font-weight:700; color:var(--ambar-texto);
+}
+
+/* Blocos de texto -------------------------------------------------- */
+.painel{
+  padding:clamp(22px,3vw,32px);
+  background:var(--branco);
+  border:1px solid var(--cinza-borda);
+  border-radius:var(--raio);
+  box-shadow:var(--sombra);
+}
+/* margem só entre painéis empilhados — não vale para painéis dentro de grid */
+.secao > .painel + .painel{margin-top:20px}
+.painel p + p{margin-top:14px}
+.painel h3{font-size:17px; margin-bottom:10px}
+.painel > .grid-trilhas{margin-top:14px}
+.texto-corpo{color:var(--texto-suave); font-size:15.5px}
+.espaco-topo{margin-top:20px}
+.texto-antes-botao{margin-bottom:16px}
+
+.destaque{
+  border-left:4px solid var(--amarelo);
+  background:var(--amarelo-claro);
+  border-radius:var(--raio-sm);
+  padding:18px 20px;
+  font-size:15px;
+  color:var(--texto);
+}
+.destaque strong{color:var(--azul)}
+
+/* Lista de trilhas (seção) ---------------------------------------- */
+.grid-trilhas{
+  display:grid; gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.trilha{
+  position:relative;
+  padding:24px 24px 24px 26px;
+  background:var(--branco);
+  border:1px solid var(--cinza-borda);
+  border-radius:var(--raio);
+  box-shadow:var(--sombra);
+  overflow:hidden;
+}
+.trilha::before{
+  content:""; position:absolute; inset:0 auto 0 0;
+  width:5px; background:var(--amarelo);
+}
+.trilha-numero{
+  display:inline-grid; place-items:center;
+  width:30px; height:30px; margin-bottom:12px;
+  background:var(--azul); color:var(--amarelo);
+  border-radius:9px;
+  font-size:14px; font-weight:800;
+}
+.trilha h3{font-size:16.5px; margin-bottom:8px}
+.trilha p{font-size:14.5px; color:var(--texto-suave)}
+
+/* Etiquetas -------------------------------------------------------- */
+.etiquetas{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.etiqueta{
+  padding:5px 11px;
+  background:var(--amarelo-claro);
+  border:1px solid var(--amarelo-vidro);
+  border-radius:999px;
+  font-size:12.5px; font-weight:600; color:var(--ambar-texto);
+}
+
+/* Galeria / vídeos: espaços reservados ---------------------------- */
+.grid-midia{
+  display:grid; gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+}
+.midia{
+  margin:0;
+  background:var(--branco);
+  border:1px solid var(--cinza-borda);
+  border-radius:var(--raio);
+  box-shadow:var(--sombra);
+  overflow:hidden;
+}
+.midia-espaco{
+  aspect-ratio:4/3;
+  display:grid; place-items:center;
+  background:
+    linear-gradient(135deg,var(--amarelo-claro) 0%,#F1F3F6 100%);
+  color:var(--azul-medio);
+  border-bottom:1px solid var(--cinza-borda);
+}
+.midia-espaco svg{width:34px; height:34px; opacity:.55}
+.midia-legenda{padding:14px 16px}
+.midia-legenda strong{display:block; font-size:14.5px; color:var(--azul)}
+.midia-legenda span{font-size:13px; color:var(--texto-suave)}
+
+/* Links importantes ------------------------------------------------ */
+.lista-links{display:grid; gap:12px}
+.item-link{
+  display:flex; align-items:center; gap:14px;
+  min-height:56px; padding:14px 18px;
+  background:var(--branco);
+  border:1px solid var(--cinza-borda);
+  border-left:4px solid var(--amarelo);
+  border-radius:var(--raio-sm);
+  text-decoration:none;
+  transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.item-link:hover{background:var(--amarelo-claro); transform:translateX(3px); box-shadow:var(--sombra)}
+.item-link strong{display:block; font-size:15px; color:var(--azul)}
+.item-link span{font-size:13.5px; color:var(--texto-suave)}
+.item-link svg{width:18px; height:18px; margin-left:auto; flex:none; color:var(--ambar-texto)}
+
+/* Créditos --------------------------------------------------------- */
+.grid-creditos{
+  display:grid; gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+
+/* Rodapé ----------------------------------------------------------- */
+.rodape{
+  margin-top:56px;
+  padding:30px clamp(20px,3vw,34px);
+  background:var(--azul);
+  border-radius:var(--raio);
+  color:#BFD0E0;
+  display:flex; flex-wrap:wrap; gap:18px;
+  align-items:center; justify-content:space-between;
+}
+.rodape strong{display:block; color:var(--branco); font-size:15.5px; margin-bottom:4px}
+.rodape p{font-size:13.5px; max-width:52ch}
+.rodape-social{display:flex; align-items:center; gap:12px}
+.instagram-rodape{
+  display:inline-flex; align-items:center; gap:10px;
+  min-height:48px; padding:11px 20px 11px 16px;
+  background:var(--amarelo); color:var(--azul-escuro);
+  border-radius:999px;
+  font-size:14.5px; font-weight:700; text-decoration:none;
+  transition:background .15s ease, transform .15s ease;
+}
+.instagram-rodape svg{width:22px; height:22px}
+.instagram-rodape:hover{background:var(--amarelo-forte); transform:translateY(-2px)}
+.instagram-rodape[aria-disabled="true"]{opacity:.8; cursor:not-allowed}
+.instagram-rodape[aria-disabled="true"]:hover{transform:none; background:var(--amarelo)}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+@media (max-width:1024px){
+  .topbar{display:flex}
+  .conteudo{margin-left:0; padding-top:calc(var(--topbar-h) + 24px)}
+  .sidebar{
+    width:min(300px,84vw);
+    transform:translateX(-102%);
+    transition:transform .24s ease;
+    box-shadow:0 0 40px rgba(12,33,54,.18);
+  }
+  body.menu-aberto .sidebar{transform:translateX(0)}
+  body.menu-aberto .overlay{opacity:1; visibility:visible}
+  body.menu-aberto{overflow:hidden}
+}
+@media (max-width:640px){
+  .hero{border-radius:18px}
+  .hero::after{ /* no celular vira um anel: não interfere na leitura do texto */
+    width:172px; right:-62px; top:-62px; transform:none;
+    background:none; border:2px solid rgba(242,201,76,.55);
+  }
+  .hero::before{display:none}
+  .hero-botoes .btn{flex:1 1 100%}
+  .secao{padding-top:44px}
+  .rodape{flex-direction:column; align-items:flex-start}
+  .rodape-social{width:100%}
+  .instagram-rodape{width:100%; justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- Barra superior: só aparece em tablet/celular -->
+<header class="topbar">
+  <button class="botao-menu" id="botaoMenu" type="button" aria-expanded="false" aria-controls="sidebar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+    Menu
+  </button>
+  <span class="marca-nome">Estância Laboratório Vivo</span>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- ============================ SIDEBAR ============================ -->
+<aside class="sidebar" id="sidebar">
+  <a class="marca" href="#inicio">
+    <span class="marca-logo" aria-hidden="true">E</span>
+    <span>
+      <span class="marca-nome">Estância</span>
+      <span class="marca-sub">Laboratório vivo</span>
+    </span>
+  </a>
+
+  <nav class="nav" id="navPrincipal" aria-label="Navegação principal">
+    <a href="#inicio" aria-current="page">Início / Home</a>
+    <a href="#projeto">O Projeto</a>
+    <a href="#trilhas">As Trilhas</a>
+    <a href="#videoteca">Videoteca Escolar</a>
+    <a href="#meio-ambiente">Meio Ambiente e Questão Racial</a>
+    <a href="#fotografias">Fotografias</a>
+    <a href="#links">Links Importantes</a>
+    <a href="#creditos">Quem Somos / Créditos</a>
+  </nav>
+
+  <div class="bloco-trilhas">
+    <p class="bloco-titulo">4 trilhas de campo</p>
+    <ul class="lista-trilhas">
+      <li>Porto D'Areia</li>
+      <li>Cidade Nova</li>
+      <li>Bonfim / Centro Histórico</li>
+      <li>Santa Cruz</li>
+    </ul>
+  </div>
+
+  <div class="rodape-sidebar">
+    <a class="link-instagram" data-instagram href="#" target="_blank" rel="noopener noreferrer"
+       aria-label="Instagram do projeto (abre em nova aba)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+        <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/>
+      </svg>
+      Instagram
+    </a>
+  </div>
+</aside>
+
+<!-- ============================ CONTEÚDO ============================ -->
+<main class="conteudo" id="conteudo">
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-texto">
+        <span class="hero-etiqueta">Pesquisa de campo escolar</span>
+        <h1>Estância como<span>laboratório vivo</span></h1>
+        <p>Pesquisa de campo, patrimônio local e protagonismo discente pelas trilhas da cidade.</p>
+        <div class="hero-botoes">
+          <a class="btn btn-primario" href="#trilhas">Ver as trilhas</a>
+          <a class="btn btn-secundario" href="#fotografias">Ver galeria</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORE O PROJETO -->
+    <section class="secao" aria-labelledby="tituloExplore">
+      <div class="secao-cabecalho">
+        <h2 id="tituloExplore">Explore o projeto</h2>
+        <p>Fundamentação teórica, objetivos e o papel da pesquisa de campo.</p>
+      </div>
+
+      <div class="grid-cards">
+        <a class="card" href="#trilhas">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M9 3 3 5.5v15L9 18l6 3 6-2.5v-15L15 6 9 3Z"/><path d="M9 3v15M15 6v15"/>
+            </svg>
+          </span>
+          <h3>As Trilhas</h3>
+          <p>Mapas, pontos de parada e análises das 4 trilhas.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+
+        <a class="card" href="#videoteca">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3z"/>
+            </svg>
+          </span>
+          <h3>Videoteca Escolar</h3>
+          <p>Vídeos e entrevistas produzidos pelos alunos.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+
+        <a class="card" href="#meio-ambiente">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4Z"/><path d="M4 20c2-5 6-8 11-9.5"/>
+            </svg>
+          </span>
+          <h3>Meio Ambiente e Questão Racial</h3>
+          <p>Justiça ambiental, ancestralidade e resistência negra.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+
+        <a class="card" href="#fotografias">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
+            </svg>
+          </span>
+          <h3>Fotografias</h3>
+          <p>Galeria de campo com registros dos alunos.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+
+        <a class="card" href="#links">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M10 13.5a4 4 0 0 0 5.7.3l2.8-2.8a4 4 0 0 0-5.7-5.7l-1.6 1.6"/>
+              <path d="M14 10.5a4 4 0 0 0-5.7-.3l-2.8 2.8a4 4 0 0 0 5.7 5.7l1.6-1.6"/>
+            </svg>
+          </span>
+          <h3>Links Importantes</h3>
+          <p>Legislações, referências e páginas institucionais.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+
+        <a class="card" href="#creditos">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/>
+              <path d="M16.5 5.2a3.5 3.5 0 0 1 0 6.6M18 20a6.6 6.6 0 0 0-2.2-4.9"/>
+            </svg>
+          </span>
+          <h3>Quem Somos / Créditos</h3>
+          <p>Instituição, professores e estudantes envolvidos.</p>
+          <span class="card-seta">Explorar →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- O PROJETO -->
+    <section class="secao" id="projeto" aria-labelledby="tituloProjeto">
+      <div class="secao-cabecalho">
+        <h2 id="tituloProjeto">O Projeto</h2>
+        <p>A cidade como fonte primária: aprender história, geografia e cidadania caminhando por Estância.</p>
+      </div>
+
+      <div class="painel">
+        <p class="texto-corpo">
+          O projeto <strong>Estância como laboratório vivo</strong> parte de uma ideia simples: a cidade não é
+          apenas o lugar onde a escola está, ela é conteúdo. Ruas, casarões, rios, praças, portos e bairros
+          guardam camadas de memória que podem ser lidas, fotografadas, questionadas e registradas pelos
+          próprios estudantes.
+        </p>
+        <p class="texto-corpo">
+          A metodologia combina estudo prévio em sala, saída de campo com roteiro definido, registro
+          fotográfico e audiovisual, entrevistas com moradores e devolutiva pública dos resultados. Cada
+          trilha percorrida vira material didático produzido pela turma.
+        </p>
+      </div>
+
+      <div class="painel">
+        <h3>Objetivos</h3>
+        <ul class="texto-corpo">
+          <li>• Reconhecer o patrimônio material e imaterial de Estância como objeto de estudo.</li>
+          <li>• Desenvolver competências de pesquisa: observação, registro, entrevista e análise de fontes.</li>
+          <li>• Estimular o protagonismo discente na produção do conhecimento e na comunicação dos resultados.</li>
+          <li>• Relacionar território, meio ambiente e relações étnico-raciais a partir da realidade local.</li>
+          <li>• Produzir um acervo escolar aberto: vídeos, fotografias e relatos de campo.</li>
+        </ul>
+      </div>
+
+      <div class="painel">
+        <h3>Como funciona uma saída de campo</h3>
+        <div class="grid-trilhas">
+          <div class="trilha">
+            <span class="trilha-numero">1</span>
+            <h3>Preparação</h3>
+            <p>Leitura de textos, mapas e fotografias antigas. A turma define perguntas de pesquisa.</p>
+          </div>
+          <div class="trilha">
+            <span class="trilha-numero">2</span>
+            <h3>Campo</h3>
+            <p>Percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas.</p>
+          </div>
+          <div class="trilha">
+            <span class="trilha-numero">3</span>
+            <h3>Devolutiva</h3>
+            <p>Edição do material, produção dos vídeos e apresentação para a comunidade escolar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AS TRILHAS -->
+    <section class="secao" id="trilhas" aria-labelledby="tituloTrilhas">
+      <div class="secao-cabecalho">
+        <h2 id="tituloTrilhas">As Trilhas</h2>
+        <p>Quatro percursos de campo que organizam a pesquisa dos estudantes pela cidade.</p>
+      </div>
+
+      <div class="grid-trilhas">
+        <article class="trilha">
+          <span class="trilha-numero">1</span>
+          <h3>Porto D'Areia</h3>
+          <p>O rio, o antigo porto e a relação da cidade com as águas: trabalho, transporte e memória ribeirinha.</p>
+          <div class="etiquetas"><span class="etiqueta">Rio</span><span class="etiqueta">Trabalho</span><span class="etiqueta">Memória</span></div>
+        </article>
+
+        <article class="trilha">
+          <span class="trilha-numero">2</span>
+          <h3>Cidade Nova</h3>
+          <p>Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p>
+          <div class="etiquetas"><span class="etiqueta">Urbanização</span><span class="etiqueta">Moradia</span><span class="etiqueta">Comunidade</span></div>
+        </article>
+
+        <article class="trilha">
+          <span class="trilha-numero">3</span>
+          <h3>Bonfim / Centro Histórico</h3>
+          <p>Casarões, igrejas e praças: arquitetura, festas populares e as disputas em torno da preservação.</p>
+          <div class="etiquetas"><span class="etiqueta">Patrimônio</span><span class="etiqueta">Arquitetura</span><span class="etiqueta">Religiosidade</span></div>
+        </article>
+
+        <article class="trilha">
+          <span class="trilha-numero">4</span>
+          <h3>Santa Cruz</h3>
+          <p>Território, cotidiano e identidade: as histórias de quem vive o bairro e constrói suas referências.</p>
+          <div class="etiquetas"><span class="etiqueta">Território</span><span class="etiqueta">Identidade</span><span class="etiqueta">Oralidade</span></div>
+        </article>
+      </div>
+
+      <p class="destaque espaco-topo">
+        <strong>Para completar:</strong> mapas dos percursos e a lista definitiva dos pontos de parada de cada
+        trilha ainda podem ser inseridos aqui.
+      </p>
+    </section>
+
+    <!-- VIDEOTECA -->
+    <section class="secao" id="videoteca" aria-labelledby="tituloVideoteca">
+      <div class="secao-cabecalho">
+        <h2 id="tituloVideoteca">Videoteca Escolar</h2>
+        <p>Vídeos, entrevistas e minidocumentários produzidos pelos estudantes durante as saídas de campo.</p>
+      </div>
+
+      <div class="grid-midia">
+        <!-- Substituir cada bloco por <iframe> do YouTube ou <video> quando os vídeos estiverem prontos -->
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo da trilha Porto D'Areia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3z"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Trilha Porto D'Areia</strong><span>Vídeo a publicar</span></div>
+        </article>
+
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para entrevista com moradores">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Entrevistas com moradores</strong><span>Vídeo a publicar</span></div>
+        </article>
+
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo do centro histórico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 20h18M5 20V9l7-5 7 5v11M10 20v-6h4v6"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Centro Histórico</strong><span>Vídeo a publicar</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MEIO AMBIENTE E QUESTÃO RACIAL -->
+    <section class="secao" id="meio-ambiente" aria-labelledby="tituloMeioAmbiente">
+      <div class="secao-cabecalho">
+        <h2 id="tituloMeioAmbiente">Meio Ambiente e Questão Racial</h2>
+        <p>Justiça ambiental, ancestralidade e resistência negra a partir do território de Estância.</p>
+      </div>
+
+      <div class="painel">
+        <p class="texto-corpo">
+          Pensar o meio ambiente na cidade é também perguntar <strong>quem sofre primeiro</strong> com enchentes,
+          poluição dos rios, falta de saneamento e ausência de áreas verdes. Essa pergunta liga a questão
+          ambiental à questão racial: no Brasil, os territórios mais vulneráveis são majoritariamente negros
+          e periféricos.
+        </p>
+        <p class="texto-corpo">
+          Nas trilhas, os estudantes observam essa desigualdade concretamente e a relacionam com a história da
+          população negra na região, com os saberes tradicionais sobre as águas e a terra e com as formas de
+          resistência cultural que seguem vivas nas festas, na religiosidade e na oralidade.
+        </p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M12 21c-4-3.5-7-6.6-7-10a7 7 0 0 1 14 0c0 3.4-3 6.5-7 10Z"/><circle cx="12" cy="11" r="2.6"/>
+            </svg>
+          </span>
+          <h3>Justiça ambiental</h3>
+          <p>Quem vive perto do risco e quem decide sobre o território.</p>
+        </div>
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M12 3v18M12 8c3-3 6-2.5 8-4-.5 4-3 6-8 6M12 13c-2.6-2.6-5.2-2.2-7-3.5.4 3.5 2.6 5.3 7 5.3"/>
+            </svg>
+          </span>
+          <h3>Ancestralidade</h3>
+          <p>Saberes sobre as águas, a terra e as plantas transmitidos entre gerações.</p>
+        </div>
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M4 21V5l8-2 8 2v16"/><path d="M9 21v-6h6v6M9 9h6"/>
+            </svg>
+          </span>
+          <h3>Resistência negra</h3>
+          <p>Festas, religiosidade e memória como formas de permanência e afirmação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOTOGRAFIAS -->
+    <section class="secao" id="fotografias" aria-labelledby="tituloFotografias">
+      <div class="secao-cabecalho">
+        <h2 id="tituloFotografias">Fotografias</h2>
+        <p>Galeria de campo com registros feitos pelos alunos durante as trilhas.</p>
+      </div>
+
+      <div class="grid-midia">
+        <!-- Trocar cada .midia-espaco por <img src="assets/foto.jpg" alt="descrição da cena"> -->
+        <figure class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para fotografia da trilha Porto D'Areia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
+            </svg>
+          </div>
+          <figcaption class="midia-legenda"><strong>Porto D'Areia</strong><span>Foto a publicar</span></figcaption>
+        </figure>
+
+        <figure class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para fotografia da trilha Cidade Nova">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
+            </svg>
+          </div>
+          <figcaption class="midia-legenda"><strong>Cidade Nova</strong><span>Foto a publicar</span></figcaption>
+        </figure>
+
+        <figure class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para fotografia do Bonfim e Centro Histórico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
+            </svg>
+          </div>
+          <figcaption class="midia-legenda"><strong>Bonfim / Centro Histórico</strong><span>Foto a publicar</span></figcaption>
+        </figure>
+
+        <figure class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para fotografia da trilha Santa Cruz">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
+            </svg>
+          </div>
+          <figcaption class="midia-legenda"><strong>Santa Cruz</strong><span>Foto a publicar</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- LINKS IMPORTANTES -->
+    <section class="secao" id="links" aria-labelledby="tituloLinks">
+      <div class="secao-cabecalho">
+        <h2 id="tituloLinks">Links Importantes</h2>
+        <p>Legislações, referências e páginas institucionais que apoiam a pesquisa.</p>
+      </div>
+
+      <div class="lista-links">
+        <a class="item-link" href="http://portal.iphan.gov.br/" target="_blank" rel="noopener noreferrer">
+          <span><strong>IPHAN</strong><span>Instituto do Patrimônio Histórico e Artístico Nacional</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+
+        <a class="item-link" href="https://www.planalto.gov.br/ccivil_03/leis/2003/l10.639.htm" target="_blank" rel="noopener noreferrer">
+          <span><strong>Lei nº 10.639/2003</strong><span>Ensino de História e Cultura Afro-Brasileira</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+
+        <a class="item-link" href="http://basenacionalcomum.mec.gov.br/" target="_blank" rel="noopener noreferrer">
+          <span><strong>BNCC</strong><span>Base Nacional Comum Curricular</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+
+        <a class="item-link" href="https://cidades.ibge.gov.br/brasil/se/estancia/panorama" target="_blank" rel="noopener noreferrer">
+          <span><strong>IBGE Cidades — Estância/SE</strong><span>Dados demográficos e territoriais do município</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="destaque espaco-topo">
+        <strong>Para completar:</strong> links da escola, da Secretaria de Educação e de acervos locais podem ser
+        acrescentados nesta lista.
+      </p>
+    </section>
+
+    <!-- QUEM SOMOS / CRÉDITOS -->
+    <section class="secao" id="creditos" aria-labelledby="tituloCreditos">
+      <div class="secao-cabecalho">
+        <h2 id="tituloCreditos">Quem Somos / Créditos</h2>
+        <p>Instituição, professores e estudantes envolvidos na construção do projeto.</p>
+      </div>
+
+      <div class="grid-creditos">
+        <div class="painel">
+          <h3>Instituição</h3>
+          <p class="texto-corpo">Escola responsável pelo projeto — <em>a preencher</em>.</p>
+        </div>
+        <div class="painel">
+          <h3>Coordenação</h3>
+          <p class="texto-corpo">Professora(s) e professor(es) responsáveis — <em>a preencher</em>.</p>
+        </div>
+        <div class="painel">
+          <h3>Estudantes</h3>
+          <p class="texto-corpo">Turmas e estudantes participantes da pesquisa de campo — <em>a preencher</em>.</p>
+        </div>
+      </div>
+
+      <div class="painel espaco-topo">
+        <h3>Acompanhe o projeto</h3>
+        <p class="texto-corpo texto-antes-botao">
+          As publicações, bastidores das trilhas e novidades da videoteca são divulgados no Instagram do projeto.
+        </p>
+        <a class="link-instagram" data-instagram href="#" target="_blank" rel="noopener noreferrer"
+           aria-label="Instagram do projeto (abre em nova aba)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram do projeto
+        </a>
+      </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+      <div>
+        <strong>Estância como laboratório vivo</strong>
+        <p>Projeto escolar de pesquisa de campo, patrimônio local e protagonismo discente.</p>
+      </div>
+      <div class="rodape-social">
+        <a class="instagram-rodape" data-instagram href="#" target="_blank" rel="noopener noreferrer"
+           aria-label="Instagram do projeto (abre em nova aba)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/>
+          </svg>
+          Siga no Instagram
+        </a>
+      </div>
+    </footer>
+
+  </div>
+</main>
+
+<script>
+/* ============================================================
+   1) INSTAGRAM — troque o valor abaixo pela URL real do perfil.
+      Exemplo: "https://www.instagram.com/nome_do_perfil/"
+      Enquanto estiver com o texto padrão, os botões ficam
+      visíveis mas desativados (não levam a um perfil falso).
+   ============================================================ */
+const INSTAGRAM_URL = "COLOCAR_URL_DO_INSTAGRAM_AQUI";
+
+(function aplicarInstagram(){
+  const configurado = /^https?:\/\//i.test(INSTAGRAM_URL);
+  document.querySelectorAll("[data-instagram]").forEach(function(link){
+    if (configurado) {
+      link.href = INSTAGRAM_URL;
+      return;
+    }
+    link.setAttribute("aria-disabled", "true");
+    link.setAttribute("title", "URL do Instagram ainda não configurada");
+    link.removeAttribute("target");
+    link.addEventListener("click", function(e){ e.preventDefault(); });
+  });
+})();
+
+/* ============================================================
+   2) MENU LATERAL NO CELULAR / TABLET
+   ============================================================ */
+(function menuResponsivo(){
+  const botao   = document.getElementById("botaoMenu");
+  const overlay = document.getElementById("overlay");
+  const sidebar = document.getElementById("sidebar");
+
+  function abrir(){
+    document.body.classList.add("menu-aberto");
+    botao.setAttribute("aria-expanded", "true");
+  }
+  function fechar(){
+    document.body.classList.remove("menu-aberto");
+    botao.setAttribute("aria-expanded", "false");
+  }
+  function alternar(){
+    document.body.classList.contains("menu-aberto") ? fechar() : abrir();
+  }
+
+  botao.addEventListener("click", alternar);
+  overlay.addEventListener("click", fechar);
+  sidebar.addEventListener("click", function(e){
+    if (e.target.closest("a")) fechar();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && document.body.classList.contains("menu-aberto")) {
+      fechar();
+      botao.focus();
+    }
+  });
+  window.addEventListener("resize", function(){
+    if (window.innerWidth > 1024) fechar();
+  });
+})();
+
+/* ============================================================
+   3) DESTAQUE DO ITEM DE MENU CONFORME A SEÇÃO VISÍVEL
+   ============================================================ */
+(function menuAtivo(){
+  const links = Array.from(document.querySelectorAll("#navPrincipal a"));
+  const secoes = links
+    .map(function(link){ return document.querySelector(link.getAttribute("href")); })
+    .filter(Boolean);
+
+  if (!("IntersectionObserver" in window) || !secoes.length) return;
+
+  function marcar(id){
+    links.forEach(function(link){
+      if (link.getAttribute("href") === "#" + id) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  const observador = new IntersectionObserver(function(entradas){
+    const visiveis = entradas
+      .filter(function(e){ return e.isIntersecting; })
+      .sort(function(a, b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+    if (visiveis.length) marcar(visiveis[0].target.id);
+  }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
+
+  secoes.forEach(function(secao){ observador.observe(secao); });
+})();
+</script>
+
+</body>
+</html>
