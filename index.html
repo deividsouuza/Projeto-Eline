@@ -495,6 +495,36 @@ ul{margin:0; padding:0; list-style:none}
   html{scroll-behavior:auto}
   *{transition-duration:.01ms !important; animation-duration:.01ms !important}
 }
+
+/* Organização das páginas e navegação */
+[hidden]{display:none !important}
+.nav a{display:flex;align-items:center;gap:10px}
+.nav a svg{width:20px;height:20px;flex:none}
+.linha-trilhas{display:flex;align-items:stretch}
+.linha-trilhas>a{flex:1;min-width:0;padding-right:4px}
+.alternar-trilhas{flex:none;width:32px;min-height:44px;padding:6px;border:0;background:transparent;color:var(--texto-suave);border-radius:8px;cursor:pointer}
+.alternar-trilhas:hover{background:var(--amarelo-claro)}
+.alternar-trilhas svg{width:18px;height:18px;transition:transform .15s}
+.alternar-trilhas[aria-expanded="true"] svg{transform:rotate(180deg)}
+.submenu-trilhas{padding-left:16px;margin:4px 0 10px}
+.submenu-trilhas a{font-size:13px;padding:10px 8px;line-height:1.4}
+.ponto-trilha{width:9px;height:9px;flex:none;border-radius:50%;background:var(--cor-trilha)}
+.nav-rodape{padding:0;margin:0 0 14px}
+.nav-rodape a{font-size:13px;color:var(--texto-suave);padding:10px 4px}
+.pagina>.secao:first-child{padding-top:8px}
+.pagina:focus{outline:none}
+.pagina h2{scroll-margin-top:90px}
+.atalhos-secao{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.atalhos-secao a{padding:7px 12px;border-radius:999px;border:1px solid var(--cinza-borda);background:var(--branco);font-size:13px;text-decoration:none;color:var(--azul)}
+.atalhos-secao a:hover{background:var(--amarelo-claro)}
+.pagina .painel+.painel{margin-top:20px}
+.mapa-pendente{min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:24px;border:1px dashed var(--cinza-borda);border-radius:var(--raio-sm);background:var(--cinza-fundo);color:var(--texto-suave);margin-top:16px}
+.mapa-pendente svg{width:32px;height:32px;color:var(--azul-medio)}
+.roteiro{list-style:decimal;padding-left:24px;margin-top:14px}
+.roteiro li+li{margin-top:10px}
+.voltar-trilhas{display:inline-flex;gap:8px;margin-bottom:20px;color:var(--ambar-texto);font-weight:600}
+.card .ponto-trilha{display:inline-block;margin-right:8px;vertical-align:middle}
+
 </style>
 </head>
 <body>
@@ -512,7 +542,8 @@ ul{margin:0; padding:0; list-style:none}
   <span class="marca-nome">Estância Laboratório Vivo</span>
 </header>
 
-<div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay">
+</div>
 
 <!-- ============================ SIDEBAR ============================ -->
 <aside class="sidebar" id="sidebar">
@@ -525,27 +556,38 @@ ul{margin:0; padding:0; list-style:none}
   </a>
 
   <nav class="nav" id="navPrincipal" aria-label="Navegação principal">
-    <a href="#inicio" aria-current="page">Início / Home</a>
-    <a href="#projeto">O Projeto</a>
-    <a href="#trilhas">As Trilhas</a>
-    <a href="#videoteca">Videoteca Escolar</a>
-    <a href="#meio-ambiente">Meio Ambiente e Questão Racial</a>
-    <a href="#fotografias">Fotografias</a>
-    <a href="#links">Links Importantes</a>
-    <a href="#creditos">Quem Somos / Créditos</a>
-  </nav>
-
-  <div class="bloco-trilhas">
-    <p class="bloco-titulo">4 trilhas de campo</p>
-    <ul class="lista-trilhas">
-      <li>Porto D'Areia</li>
-      <li>Cidade Nova</li>
-      <li>Bonfim / Centro Histórico</li>
-      <li>Santa Cruz</li>
-    </ul>
+  <a href="#inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>Início</span>
+</a>
+  <a href="#projeto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></svg><span>O Projeto</span>
+</a>
+  <div class="grupo-trilhas">
+    <div class="linha-trilhas">
+<a href="#trilhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg><span>Explore as Trilhas</span>
+</a><button class="alternar-trilhas" id="alternarTrilhas" type="button" aria-expanded="false" aria-controls="submenuTrilhas" aria-label="Expandir trilhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+</div>
+    <div class="submenu-trilhas" id="submenuTrilhas" hidden>
+<a href="#trilha-quilombolas"><span class="ponto-trilha" style="--cor-trilha:#D64F86" aria-hidden="true"></span><span>Trilha dos Quilombolas</span>
+</a>
+<a href="#trilha-cidade-nova"><span class="ponto-trilha" style="--cor-trilha:#34845A" aria-hidden="true"></span><span>Cidade Nova: Um Novo Olhar</span>
+</a>
+<a href="#trilha-industrias"><span class="ponto-trilha" style="--cor-trilha:#3979C3" aria-hidden="true"></span><span>Indústrias Além do Tempo</span>
+</a>
+<a href="#trilha-operarios"><span class="ponto-trilha" style="--cor-trilha:#D47A30" aria-hidden="true"></span><span>Operários da Memória</span>
+</a>
+</div>
   </div>
-
-  <div class="rodape-sidebar">
+  <a href="#galeria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg><span>Galeria de Registros</span>
+</a>
+<a href="#educacao-territorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4ZM4 20c2-5 6-8 11-9.5"/></svg><span>Educação e Território</span>
+</a>
+<a href="#quem-somos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-4-5"/></svg><span>Quem Somos</span>
+</a>
+</nav>
+<div class="rodape-sidebar">
+<nav class="nav nav-rodape" aria-label="Links e créditos">
+<a href="#links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 13 4-4M8 15l-2 2a4 4 0 0 1-5-6l4-4a4 4 0 0 1 6 0M16 9l2-2a4 4 0 0 0-5-6l-4 4a4 4 0 0 0 0 6" transform="translate(2 2)"/></svg><span>Links Úteis e Créditos</span>
+</a>
+</nav>
     <a class="link-instagram" data-instagram href="#" target="_blank" rel="noopener noreferrer"
        aria-label="Instagram do projeto (abre em nova aba)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
@@ -559,123 +601,83 @@ ul{margin:0; padding:0; list-style:none}
 </aside>
 
 <!-- ============================ CONTEÚDO ============================ -->
-<main class="conteudo" id="conteudo">
+<main class="conteudo" id="conteudo" tabindex="-1">
   <div class="container">
 
-    <!-- HERO -->
+<div class="pagina" data-pagina="inicio" tabindex="-1">    <!-- HERO -->
     <section class="hero" id="inicio">
       <div class="hero-texto">
         <span class="hero-etiqueta">Pesquisa de campo escolar</span>
-        <h1>Estância como<span>laboratório vivo</span></h1>
+        <h1>Estância como<span>laboratório vivo</span>
+</h1>
         <p>Pesquisa de campo, patrimônio local e protagonismo discente pelas trilhas da cidade.</p>
         <div class="hero-botoes">
           <a class="btn btn-primario" href="#trilhas">Ver as trilhas</a>
-          <a class="btn btn-secundario" href="#fotografias">Ver galeria</a>
+          <a class="btn btn-secundario" href="#galeria">Ver galeria</a>
         </div>
       </div>
     </section>
+<section class="secao" aria-labelledby="tituloExplore">
+<div class="secao-cabecalho">
+<h2 id="tituloExplore">Explore o projeto</h2>
+<p>Fundamentação teórica, objetivos e o papel da pesquisa de campo.</p>
+</div>
+<div class="grid-cards">
+<a class="card" href="#projeto"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></svg></span>
+<h3>O Projeto</h3>
+<p>Fundamentação teórica, objetivos e o papel da pesquisa de campo.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#trilhas"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg></span>
+<h3>Explore as Trilhas</h3>
+<p>Mapas, pontos de parada e análises das 4 trilhas.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#galeria"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg></span>
+<h3>Galeria de Registros</h3>
+<p>Galeria de campo com registros dos alunos. Vídeos e entrevistas produzidos pelos alunos.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#educacao-territorio"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4ZM4 20c2-5 6-8 11-9.5"/></svg></span>
+<h3>Educação e Território</h3>
+<p>Justiça ambiental, ancestralidade e resistência negra.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#quem-somos"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-4-5"/></svg></span>
+<h3>Quem Somos</h3>
+<p>Instituição, professores e estudantes envolvidos.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#links"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 13 4-4M8 15l-2 2a4 4 0 0 1-5-6l4-4a4 4 0 0 1 6 0M16 9l2-2a4 4 0 0 0-5-6l-4 4a4 4 0 0 0 0 6" transform="translate(2 2)"/></svg></span>
+<h3>Links Úteis e Créditos</h3>
+<p>Legislações, referências e páginas institucionais.</p><span class="card-seta">Explorar →</span>
+</a>
+</div>
+</section>
+</div>
 
-    <!-- EXPLORE O PROJETO -->
-    <section class="secao" aria-labelledby="tituloExplore">
-      <div class="secao-cabecalho">
-        <h2 id="tituloExplore">Explore o projeto</h2>
-        <p>Fundamentação teórica, objetivos e o papel da pesquisa de campo.</p>
-      </div>
-
-      <div class="grid-cards">
-        <a class="card" href="#trilhas">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M9 3 3 5.5v15L9 18l6 3 6-2.5v-15L15 6 9 3Z"/><path d="M9 3v15M15 6v15"/>
-            </svg>
-          </span>
-          <h3>As Trilhas</h3>
-          <p>Mapas, pontos de parada e análises das 4 trilhas.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-
-        <a class="card" href="#videoteca">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3z"/>
-            </svg>
-          </span>
-          <h3>Videoteca Escolar</h3>
-          <p>Vídeos e entrevistas produzidos pelos alunos.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-
-        <a class="card" href="#meio-ambiente">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4Z"/><path d="M4 20c2-5 6-8 11-9.5"/>
-            </svg>
-          </span>
-          <h3>Meio Ambiente e Questão Racial</h3>
-          <p>Justiça ambiental, ancestralidade e resistência negra.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-
-        <a class="card" href="#fotografias">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.3-2h6.8l1.3 2h1.8A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-9Z"/><circle cx="12" cy="12.8" r="3.6"/>
-            </svg>
-          </span>
-          <h3>Fotografias</h3>
-          <p>Galeria de campo com registros dos alunos.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-
-        <a class="card" href="#links">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-              <path d="M10 13.5a4 4 0 0 0 5.7.3l2.8-2.8a4 4 0 0 0-5.7-5.7l-1.6 1.6"/>
-              <path d="M14 10.5a4 4 0 0 0-5.7-.3l-2.8 2.8a4 4 0 0 0 5.7 5.7l1.6-1.6"/>
-            </svg>
-          </span>
-          <h3>Links Importantes</h3>
-          <p>Legislações, referências e páginas institucionais.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-
-        <a class="card" href="#creditos">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/>
-              <path d="M16.5 5.2a3.5 3.5 0 0 1 0 6.6M18 20a6.6 6.6 0 0 0-2.2-4.9"/>
-            </svg>
-          </span>
-          <h3>Quem Somos / Créditos</h3>
-          <p>Instituição, professores e estudantes envolvidos.</p>
-          <span class="card-seta">Explorar →</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- O PROJETO -->
-    <section class="secao" id="projeto" aria-labelledby="tituloProjeto">
+<div class="pagina" data-pagina="projeto" tabindex="-1" hidden>
+<section class="secao" id="projeto" aria-labelledby="tituloProjeto">
       <div class="secao-cabecalho">
         <h2 id="tituloProjeto">O Projeto</h2>
         <p>A cidade como fonte primária: aprender história, geografia e cidadania caminhando por Estância.</p>
       </div>
 
-      <div class="painel">
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#apresentacao">Apresentação</a>
+<a href="#objetivos">Objetivos</a>
+<a href="#metodologia">Metodologia</a>
+<a href="#oficinas">Oficinas</a>
+<a href="#visitas-tecnicas">Visitas Técnicas</a>
+</nav>
+<div class="painel" id="apresentacao">
+<h3>Apresentação</h3>
         <p class="texto-corpo">
           O projeto <strong>Estância como laboratório vivo</strong> parte de uma ideia simples: a cidade não é
           apenas o lugar onde a escola está, ela é conteúdo. Ruas, casarões, rios, praças, portos e bairros
           guardam camadas de memória que podem ser lidas, fotografadas, questionadas e registradas pelos
           próprios estudantes.
         </p>
-        <p class="texto-corpo">
-          A metodologia combina estudo prévio em sala, saída de campo com roteiro definido, registro
-          fotográfico e audiovisual, entrevistas com moradores e devolutiva pública dos resultados. Cada
-          trilha percorrida vira material didático produzido pela turma.
-        </p>
+
       </div>
 
       <div class="painel">
-        <h3>Objetivos</h3>
+        <h3 id="objetivos">Objetivos</h3>
         <ul class="texto-corpo">
           <li>• Reconhecer o patrimônio material e imaterial de Estância como objeto de estudo.</li>
           <li>• Desenvolver competências de pesquisa: observação, registro, entrevista e análise de fontes.</li>
@@ -686,7 +688,12 @@ ul{margin:0; padding:0; list-style:none}
       </div>
 
       <div class="painel">
-        <h3>Como funciona uma saída de campo</h3>
+        <h3 id="metodologia">Metodologia</h3>        <p class="texto-corpo">
+          A metodologia combina estudo prévio em sala, saída de campo com roteiro definido, registro
+          fotográfico e audiovisual, entrevistas com moradores e devolutiva pública dos resultados. Cada
+          trilha percorrida vira material didático produzido pela turma.
+        </p>
+<h3>Como funciona uma saída de campo</h3>
         <div class="grid-trilhas">
           <div class="trilha">
             <span class="trilha-numero">1</span>
@@ -705,143 +712,267 @@ ul{margin:0; padding:0; list-style:none}
           </div>
         </div>
       </div>
-    </section>
+    <section class="painel" id="oficinas" aria-labelledby="oficinas-titulo">
+<h3 id="oficinas-titulo">Oficinas</h3>
+<p class="texto-corpo">Edição do material, produção dos vídeos e apresentação para a comunidade escolar. Os registros específicos das oficinas serão acrescentados aqui.</p>
+</section>
+<section class="painel" id="visitas-tecnicas" aria-labelledby="visitas-tecnicas-titulo">
+<h3 id="visitas-tecnicas-titulo">Visitas Técnicas</h3>
+<p class="texto-corpo">Percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas. Os registros específicos das visitas técnicas serão acrescentados aqui.</p>
+</section>
+</section>
+</div>
 
-    <!-- AS TRILHAS -->
-    <section class="secao" id="trilhas" aria-labelledby="tituloTrilhas">
-      <div class="secao-cabecalho">
-        <h2 id="tituloTrilhas">As Trilhas</h2>
-        <p>Quatro percursos de campo que organizam a pesquisa dos estudantes pela cidade.</p>
-      </div>
-
-      <div class="grid-trilhas">
+<div class="pagina" data-pagina="trilhas" tabindex="-1" hidden>
+<section class="secao" id="trilhas" aria-labelledby="tituloTrilhas">
+<div class="secao-cabecalho">
+<h2 id="tituloTrilhas">Explore as Trilhas</h2>
+<p>Quatro percursos de campo que organizam a pesquisa dos estudantes pela cidade.</p>
+</div>
+<div class="grid-cards">
+<a class="card" href="#trilha-quilombolas">
+<h3><span class="ponto-trilha" style="--cor-trilha:#D64F86" aria-hidden="true"></span>Trilha dos Quilombolas</h3>
+<p>Ancestralidade, saberes tradicionais e resistência negra no território de Estância.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#trilha-cidade-nova">
+<h3><span class="ponto-trilha" style="--cor-trilha:#34845A" aria-hidden="true"></span>Cidade Nova: Um Novo Olhar</h3>
+<p>Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#trilha-industrias">
+<h3><span class="ponto-trilha" style="--cor-trilha:#3979C3" aria-hidden="true"></span>Indústrias Além do Tempo</h3>
+<p>Trabalho, patrimônio e transformações da cidade ao longo do tempo.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#trilha-operarios">
+<h3><span class="ponto-trilha" style="--cor-trilha:#D47A30" aria-hidden="true"></span>Operários da Memória</h3>
+<p>Memórias do trabalho e do cotidiano, registradas na oralidade e nas histórias dos moradores.</p><span class="card-seta">Explorar →</span>
+</a>
+</div>
+<section class="painel" id="mapas-roteiros" aria-labelledby="mapas-roteiros-titulo">
+<h3 id="mapas-roteiros-titulo">Mapas, pontos interpretativos e roteiros</h3>
+<p class="texto-corpo">Cada trilha reúne seu mapa, a descrição, os pontos de parada e o roteiro em uma página própria. Os mapas e a lista definitiva dos pontos de parada aguardam publicação.</p>
+</section>
+<p class="destaque espaco-topo">
+        <strong>Para completar:</strong> mapas dos percursos e a lista definitiva dos pontos de parada de cada
+        trilha ainda podem ser inseridos aqui.
+      </p>
+<section class="secao" aria-labelledby="registrosTerritoriais">
+<div class="secao-cabecalho">
+<h2 id="registrosTerritoriais">Registros territoriais</h2>
+<p>Descrições dos percursos de campo reunidas no projeto.</p>
+</div>
+<div class="grid-trilhas">
         <article class="trilha">
           <span class="trilha-numero">1</span>
           <h3>Porto D'Areia</h3>
           <p>O rio, o antigo porto e a relação da cidade com as águas: trabalho, transporte e memória ribeirinha.</p>
-          <div class="etiquetas"><span class="etiqueta">Rio</span><span class="etiqueta">Trabalho</span><span class="etiqueta">Memória</span></div>
+          <div class="etiquetas"><span class="etiqueta">Rio</span><span class="etiqueta">Trabalho</span><span class="etiqueta">Memória</span>
+</div>
         </article>
 
         <article class="trilha">
           <span class="trilha-numero">2</span>
           <h3>Cidade Nova</h3>
           <p>Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p>
-          <div class="etiquetas"><span class="etiqueta">Urbanização</span><span class="etiqueta">Moradia</span><span class="etiqueta">Comunidade</span></div>
+          <div class="etiquetas"><span class="etiqueta">Urbanização</span><span class="etiqueta">Moradia</span><span class="etiqueta">Comunidade</span>
+</div>
         </article>
 
         <article class="trilha">
           <span class="trilha-numero">3</span>
           <h3>Bonfim / Centro Histórico</h3>
           <p>Casarões, igrejas e praças: arquitetura, festas populares e as disputas em torno da preservação.</p>
-          <div class="etiquetas"><span class="etiqueta">Patrimônio</span><span class="etiqueta">Arquitetura</span><span class="etiqueta">Religiosidade</span></div>
+          <div class="etiquetas"><span class="etiqueta">Patrimônio</span><span class="etiqueta">Arquitetura</span><span class="etiqueta">Religiosidade</span>
+</div>
         </article>
 
         <article class="trilha">
           <span class="trilha-numero">4</span>
           <h3>Santa Cruz</h3>
           <p>Território, cotidiano e identidade: as histórias de quem vive o bairro e constrói suas referências.</p>
-          <div class="etiquetas"><span class="etiqueta">Território</span><span class="etiqueta">Identidade</span><span class="etiqueta">Oralidade</span></div>
+          <div class="etiquetas"><span class="etiqueta">Território</span><span class="etiqueta">Identidade</span><span class="etiqueta">Oralidade</span>
+</div>
         </article>
       </div>
+</section>
+</section>
+</div>
 
-      <p class="destaque espaco-topo">
-        <strong>Para completar:</strong> mapas dos percursos e a lista definitiva dos pontos de parada de cada
-        trilha ainda podem ser inseridos aqui.
-      </p>
-    </section>
+<div class="pagina" data-pagina="trilha-quilombolas" tabindex="-1" hidden>
+<section class="secao" id="trilha-quilombolas" aria-labelledby="titulo-trilha-quilombolas">
+<a class="voltar-trilhas" href="#trilhas">← Explore as Trilhas</a>
+<div class="secao-cabecalho">
+<h2 id="titulo-trilha-quilombolas">Trilha dos Quilombolas</h2>
+<p>Ancestralidade, saberes tradicionais e resistência negra no território de Estância.</p>
+</div>
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#trilha-quilombolas-mapa">Mapa</a>
+<a href="#trilha-quilombolas-pontos">Pontos de parada</a>
+<a href="#trilha-quilombolas-descricao">Descrição</a>
+<a href="#trilha-quilombolas-roteiro">Roteiro</a>
+</nav>
+<section class="painel" id="trilha-quilombolas-descricao" aria-labelledby="trilha-quilombolas-descricao-titulo">
+<h3 id="trilha-quilombolas-descricao-titulo">Descrição</h3>
+<p class="texto-corpo">Ancestralidade, saberes tradicionais e resistência negra no território de Estância.</p>
+</section>
+<section class="painel" id="trilha-quilombolas-mapa" aria-labelledby="trilha-quilombolas-mapa-titulo">
+<h3 id="trilha-quilombolas-mapa-titulo">Mapa da trilha</h3>
+<div class="mapa-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg>
+<p>Mapa do percurso a publicar.</p>
+</div>
+</section>
+<section class="painel" id="trilha-quilombolas-pontos" aria-labelledby="trilha-quilombolas-pontos-titulo">
+<h3 id="trilha-quilombolas-pontos-titulo">Pontos de parada e pontos interpretativos</h3>
+<p class="texto-corpo">A lista definitiva dos pontos de parada desta trilha será publicada após a definição do percurso.</p>
+</section>
+<section class="painel" id="trilha-quilombolas-roteiro" aria-labelledby="trilha-quilombolas-roteiro-titulo">
+<h3 id="trilha-quilombolas-roteiro-titulo">Roteiro de pesquisa</h3>
+<ol class="roteiro">
+<li><strong>Preparação:</strong> leitura de textos, mapas e fotografias antigas; definição das perguntas de pesquisa.</li>
+<li><strong>Campo:</strong> percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas.</li>
+<li><strong>Devolutiva:</strong> edição do material, produção dos vídeos e apresentação para a comunidade escolar.</li>
+</ol>
+<p class="texto-corpo">O roteiro específico, com a ordem das paradas, aguarda a definição do percurso.</p>
+</section>
+<p class="espaco-topo">
+<a href="#galeria">Ver galeria →</a>
+</p>
+</section>
+</div>
+<div class="pagina" data-pagina="trilha-cidade-nova" tabindex="-1" hidden>
+<section class="secao" id="trilha-cidade-nova" aria-labelledby="titulo-trilha-cidade-nova">
+<a class="voltar-trilhas" href="#trilhas">← Explore as Trilhas</a>
+<div class="secao-cabecalho">
+<h2 id="titulo-trilha-cidade-nova">Cidade Nova: Um Novo Olhar</h2>
+<p>Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p>
+</div>
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#trilha-cidade-nova-mapa">Mapa</a>
+<a href="#trilha-cidade-nova-pontos">Pontos de parada</a>
+<a href="#trilha-cidade-nova-descricao">Descrição</a>
+<a href="#trilha-cidade-nova-roteiro">Roteiro</a>
+</nav>
+<section class="painel" id="trilha-cidade-nova-descricao" aria-labelledby="trilha-cidade-nova-descricao-titulo">
+<h3 id="trilha-cidade-nova-descricao-titulo">Descrição</h3>
+<p class="texto-corpo">Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p>
+</section>
+<section class="painel" id="trilha-cidade-nova-mapa" aria-labelledby="trilha-cidade-nova-mapa-titulo">
+<h3 id="trilha-cidade-nova-mapa-titulo">Mapa da trilha</h3>
+<div class="mapa-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg>
+<p>Mapa do percurso a publicar.</p>
+</div>
+</section>
+<section class="painel" id="trilha-cidade-nova-pontos" aria-labelledby="trilha-cidade-nova-pontos-titulo">
+<h3 id="trilha-cidade-nova-pontos-titulo">Pontos de parada e pontos interpretativos</h3>
+<p class="texto-corpo">A lista definitiva dos pontos de parada desta trilha será publicada após a definição do percurso.</p>
+</section>
+<section class="painel" id="trilha-cidade-nova-roteiro" aria-labelledby="trilha-cidade-nova-roteiro-titulo">
+<h3 id="trilha-cidade-nova-roteiro-titulo">Roteiro de pesquisa</h3>
+<ol class="roteiro">
+<li><strong>Preparação:</strong> leitura de textos, mapas e fotografias antigas; definição das perguntas de pesquisa.</li>
+<li><strong>Campo:</strong> percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas.</li>
+<li><strong>Devolutiva:</strong> edição do material, produção dos vídeos e apresentação para a comunidade escolar.</li>
+</ol>
+<p class="texto-corpo">O roteiro específico, com a ordem das paradas, aguarda a definição do percurso.</p>
+</section>
+<p class="espaco-topo">
+<a href="#galeria">Ver galeria →</a>
+</p>
+</section>
+</div>
+<div class="pagina" data-pagina="trilha-industrias" tabindex="-1" hidden>
+<section class="secao" id="trilha-industrias" aria-labelledby="titulo-trilha-industrias">
+<a class="voltar-trilhas" href="#trilhas">← Explore as Trilhas</a>
+<div class="secao-cabecalho">
+<h2 id="titulo-trilha-industrias">Indústrias Além do Tempo</h2>
+<p>Trabalho, patrimônio e transformações da cidade ao longo do tempo.</p>
+</div>
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#trilha-industrias-mapa">Mapa</a>
+<a href="#trilha-industrias-pontos">Pontos de parada</a>
+<a href="#trilha-industrias-descricao">Descrição</a>
+<a href="#trilha-industrias-roteiro">Roteiro</a>
+</nav>
+<section class="painel" id="trilha-industrias-descricao" aria-labelledby="trilha-industrias-descricao-titulo">
+<h3 id="trilha-industrias-descricao-titulo">Descrição</h3>
+<p class="texto-corpo">Trabalho, patrimônio e transformações da cidade ao longo do tempo.</p>
+</section>
+<section class="painel" id="trilha-industrias-mapa" aria-labelledby="trilha-industrias-mapa-titulo">
+<h3 id="trilha-industrias-mapa-titulo">Mapa da trilha</h3>
+<div class="mapa-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg>
+<p>Mapa do percurso a publicar.</p>
+</div>
+</section>
+<section class="painel" id="trilha-industrias-pontos" aria-labelledby="trilha-industrias-pontos-titulo">
+<h3 id="trilha-industrias-pontos-titulo">Pontos de parada e pontos interpretativos</h3>
+<p class="texto-corpo">A lista definitiva dos pontos de parada desta trilha será publicada após a definição do percurso.</p>
+</section>
+<section class="painel" id="trilha-industrias-roteiro" aria-labelledby="trilha-industrias-roteiro-titulo">
+<h3 id="trilha-industrias-roteiro-titulo">Roteiro de pesquisa</h3>
+<ol class="roteiro">
+<li><strong>Preparação:</strong> leitura de textos, mapas e fotografias antigas; definição das perguntas de pesquisa.</li>
+<li><strong>Campo:</strong> percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas.</li>
+<li><strong>Devolutiva:</strong> edição do material, produção dos vídeos e apresentação para a comunidade escolar.</li>
+</ol>
+<p class="texto-corpo">O roteiro específico, com a ordem das paradas, aguarda a definição do percurso.</p>
+</section>
+<p class="espaco-topo">
+<a href="#galeria">Ver galeria →</a>
+</p>
+</section>
+</div>
+<div class="pagina" data-pagina="trilha-operarios" tabindex="-1" hidden>
+<section class="secao" id="trilha-operarios" aria-labelledby="titulo-trilha-operarios">
+<a class="voltar-trilhas" href="#trilhas">← Explore as Trilhas</a>
+<div class="secao-cabecalho">
+<h2 id="titulo-trilha-operarios">Operários da Memória</h2>
+<p>Memórias do trabalho e do cotidiano, registradas na oralidade e nas histórias dos moradores.</p>
+</div>
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#trilha-operarios-mapa">Mapa</a>
+<a href="#trilha-operarios-pontos">Pontos de parada</a>
+<a href="#trilha-operarios-descricao">Descrição</a>
+<a href="#trilha-operarios-roteiro">Roteiro</a>
+</nav>
+<section class="painel" id="trilha-operarios-descricao" aria-labelledby="trilha-operarios-descricao-titulo">
+<h3 id="trilha-operarios-descricao-titulo">Descrição</h3>
+<p class="texto-corpo">Memórias do trabalho e do cotidiano, registradas na oralidade e nas histórias dos moradores.</p>
+</section>
+<section class="painel" id="trilha-operarios-mapa" aria-labelledby="trilha-operarios-mapa-titulo">
+<h3 id="trilha-operarios-mapa-titulo">Mapa da trilha</h3>
+<div class="mapa-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-6 3v15l6-3 6 3 6-3V3l-6 3-6-3Zm0 0v15M15 6v15"/></svg>
+<p>Mapa do percurso a publicar.</p>
+</div>
+</section>
+<section class="painel" id="trilha-operarios-pontos" aria-labelledby="trilha-operarios-pontos-titulo">
+<h3 id="trilha-operarios-pontos-titulo">Pontos de parada e pontos interpretativos</h3>
+<p class="texto-corpo">A lista definitiva dos pontos de parada desta trilha será publicada após a definição do percurso.</p>
+</section>
+<section class="painel" id="trilha-operarios-roteiro" aria-labelledby="trilha-operarios-roteiro-titulo">
+<h3 id="trilha-operarios-roteiro-titulo">Roteiro de pesquisa</h3>
+<ol class="roteiro">
+<li><strong>Preparação:</strong> leitura de textos, mapas e fotografias antigas; definição das perguntas de pesquisa.</li>
+<li><strong>Campo:</strong> percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas.</li>
+<li><strong>Devolutiva:</strong> edição do material, produção dos vídeos e apresentação para a comunidade escolar.</li>
+</ol>
+<p class="texto-corpo">O roteiro específico, com a ordem das paradas, aguarda a definição do percurso.</p>
+</section>
+<p class="espaco-topo">
+<a href="#galeria">Ver galeria →</a>
+</p>
+</section>
+</div>
 
-    <!-- VIDEOTECA -->
-    <section class="secao" id="videoteca" aria-labelledby="tituloVideoteca">
-      <div class="secao-cabecalho">
-        <h2 id="tituloVideoteca">Videoteca Escolar</h2>
-        <p>Vídeos, entrevistas e minidocumentários produzidos pelos estudantes durante as saídas de campo.</p>
-      </div>
-
-      <div class="grid-midia">
-        <!-- Substituir cada bloco por <iframe> do YouTube ou <video> quando os vídeos estiverem prontos -->
-        <article class="midia">
-          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo da trilha Porto D'Areia">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-              <rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3z"/>
-            </svg>
-          </div>
-          <div class="midia-legenda"><strong>Trilha Porto D'Areia</strong><span>Vídeo a publicar</span></div>
-        </article>
-
-        <article class="midia">
-          <div class="midia-espaco" role="img" aria-label="Espaço reservado para entrevista com moradores">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-              <rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5"/>
-            </svg>
-          </div>
-          <div class="midia-legenda"><strong>Entrevistas com moradores</strong><span>Vídeo a publicar</span></div>
-        </article>
-
-        <article class="midia">
-          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo do centro histórico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-              <path d="M3 20h18M5 20V9l7-5 7 5v11M10 20v-6h4v6"/>
-            </svg>
-          </div>
-          <div class="midia-legenda"><strong>Centro Histórico</strong><span>Vídeo a publicar</span></div>
-        </article>
-      </div>
-    </section>
-
-    <!-- MEIO AMBIENTE E QUESTÃO RACIAL -->
-    <section class="secao" id="meio-ambiente" aria-labelledby="tituloMeioAmbiente">
-      <div class="secao-cabecalho">
-        <h2 id="tituloMeioAmbiente">Meio Ambiente e Questão Racial</h2>
-        <p>Justiça ambiental, ancestralidade e resistência negra a partir do território de Estância.</p>
-      </div>
-
-      <div class="painel">
-        <p class="texto-corpo">
-          Pensar o meio ambiente na cidade é também perguntar <strong>quem sofre primeiro</strong> com enchentes,
-          poluição dos rios, falta de saneamento e ausência de áreas verdes. Essa pergunta liga a questão
-          ambiental à questão racial: no Brasil, os territórios mais vulneráveis são majoritariamente negros
-          e periféricos.
-        </p>
-        <p class="texto-corpo">
-          Nas trilhas, os estudantes observam essa desigualdade concretamente e a relacionam com a história da
-          população negra na região, com os saberes tradicionais sobre as águas e a terra e com as formas de
-          resistência cultural que seguem vivas nas festas, na religiosidade e na oralidade.
-        </p>
-      </div>
-
-      <div class="grid-cards">
-        <div class="card">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M12 21c-4-3.5-7-6.6-7-10a7 7 0 0 1 14 0c0 3.4-3 6.5-7 10Z"/><circle cx="12" cy="11" r="2.6"/>
-            </svg>
-          </span>
-          <h3>Justiça ambiental</h3>
-          <p>Quem vive perto do risco e quem decide sobre o território.</p>
-        </div>
-        <div class="card">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M12 3v18M12 8c3-3 6-2.5 8-4-.5 4-3 6-8 6M12 13c-2.6-2.6-5.2-2.2-7-3.5.4 3.5 2.6 5.3 7 5.3"/>
-            </svg>
-          </span>
-          <h3>Ancestralidade</h3>
-          <p>Saberes sobre as águas, a terra e as plantas transmitidos entre gerações.</p>
-        </div>
-        <div class="card">
-          <span class="card-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-              <path d="M4 21V5l8-2 8 2v16"/><path d="M9 21v-6h6v6M9 9h6"/>
-            </svg>
-          </span>
-          <h3>Resistência negra</h3>
-          <p>Festas, religiosidade e memória como formas de permanência e afirmação.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOTOGRAFIAS -->
-    <section class="secao" id="fotografias" aria-labelledby="tituloFotografias">
+<div class="pagina" data-pagina="galeria" tabindex="-1" hidden>
+<section class="secao" id="galeria" aria-labelledby="tituloGaleria">
+<div class="secao-cabecalho">
+<h2 id="tituloGaleria">Galeria de Registros</h2>
+<p>Fotografias, vídeos e entrevistas feitos pelos alunos.</p>
+</div>
+<nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#fotografias">Fotografias</a>
+<a href="#videoteca">Videoteca Escolar</a>
+</nav>
+<section class="secao" id="fotografias" aria-labelledby="tituloFotografias">
       <div class="secao-cabecalho">
         <h2 id="tituloFotografias">Fotografias</h2>
         <p>Galeria de campo com registros feitos pelos alunos durante as trilhas.</p>
@@ -886,11 +1017,171 @@ ul{margin:0; padding:0; list-style:none}
         </figure>
       </div>
     </section>
-
-    <!-- LINKS IMPORTANTES -->
-    <section class="secao" id="links" aria-labelledby="tituloLinks">
+<section class="secao" id="videoteca" aria-labelledby="tituloVideoteca">
       <div class="secao-cabecalho">
-        <h2 id="tituloLinks">Links Importantes</h2>
+        <h2 id="tituloVideoteca">Videoteca Escolar</h2>
+        <p>Vídeos, entrevistas e minidocumentários produzidos pelos estudantes durante as saídas de campo.</p>
+      </div>
+
+      <div class="grid-midia">
+        <!-- Substituir cada bloco por <iframe> do YouTube ou <video> quando os vídeos estiverem prontos -->
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo da trilha Porto D'Areia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3z"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Trilha Porto D'Areia</strong><span>Vídeo a publicar</span>
+</div>
+        </article>
+
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para entrevista com moradores">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Entrevistas com moradores</strong><span>Vídeo a publicar</span>
+</div>
+        </article>
+
+        <article class="midia">
+          <div class="midia-espaco" role="img" aria-label="Espaço reservado para vídeo do centro histórico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M3 20h18M5 20V9l7-5 7 5v11M10 20v-6h4v6"/>
+            </svg>
+          </div>
+          <div class="midia-legenda"><strong>Centro Histórico</strong><span>Vídeo a publicar</span>
+</div>
+        </article>
+      </div>
+    </section>
+</section>
+</div>
+
+<div class="pagina" data-pagina="educacao-territorio" tabindex="-1" hidden>
+<section class="secao" id="educacao-territorio" aria-labelledby="tituloEducacao">
+      <div class="secao-cabecalho">
+        <h2 id="tituloEducacao">Educação e Território</h2>
+        <p>Justiça ambiental, ancestralidade e resistência negra a partir do território de Estância.</p>
+      </div>
+
+      <nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#meio-ambiente">Meio Ambiente</a>
+<a href="#relacoes-etnico-raciais">Relações Étnico-Raciais</a>
+<a href="#materiais-educativos">Materiais Educativos</a>
+</nav>
+<div class="painel" id="meio-ambiente">
+<h3>Meio Ambiente</h3>
+<p class="texto-corpo">Meio Ambiente e Questão Racial</p>
+        <p class="texto-corpo">
+          Pensar o meio ambiente na cidade é também perguntar <strong>quem sofre primeiro</strong> com enchentes,
+          poluição dos rios, falta de saneamento e ausência de áreas verdes. Essa pergunta liga a questão
+          ambiental à questão racial: no Brasil, os territórios mais vulneráveis são majoritariamente negros
+          e periféricos.
+        </p>
+</div>
+<div class="painel" id="relacoes-etnico-raciais">
+<h3>Relações Étnico-Raciais</h3>
+<p class="texto-corpo">Nas trilhas, os estudantes observam essa desigualdade concretamente e a relacionam com a história da
+          população negra na região, com os saberes tradicionais sobre as águas e a terra e com as formas de
+          resistência cultural que seguem vivas nas festas, na religiosidade e na oralidade.
+        </p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M12 21c-4-3.5-7-6.6-7-10a7 7 0 0 1 14 0c0 3.4-3 6.5-7 10Z"/><circle cx="12" cy="11" r="2.6"/>
+            </svg>
+          </span>
+          <h3>Justiça ambiental</h3>
+          <p>Quem vive perto do risco e quem decide sobre o território.</p>
+        </div>
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M12 3v18M12 8c3-3 6-2.5 8-4-.5 4-3 6-8 6M12 13c-2.6-2.6-5.2-2.2-7-3.5.4 3.5 2.6 5.3 7 5.3"/>
+            </svg>
+          </span>
+          <h3>Ancestralidade</h3>
+          <p>Saberes sobre as águas, a terra e as plantas transmitidos entre gerações.</p>
+        </div>
+        <div class="card">
+          <span class="card-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+              <path d="M4 21V5l8-2 8 2v16"/><path d="M9 21v-6h6v6M9 9h6"/>
+            </svg>
+          </span>
+          <h3>Resistência negra</h3>
+          <p>Festas, religiosidade e memória como formas de permanência e afirmação.</p>
+        </div>
+      </div>
+    <section class="painel" id="materiais-educativos" aria-labelledby="materiais-educativos-titulo">
+<h3 id="materiais-educativos-titulo">Materiais Educativos</h3>
+<p class="texto-corpo">Cada trilha percorrida vira material didático produzido pela turma. Consulte os <a href="#galeria">registros dos estudantes</a>, os <a href="#trilhas">roteiros das trilhas</a> e as <a href="#links">referências do projeto</a>.</p>
+</section>
+</section>
+</div>
+
+<div class="pagina" data-pagina="quem-somos" tabindex="-1" hidden>
+<section class="secao" id="quem-somos" aria-labelledby="tituloQuemSomos">
+      <div class="secao-cabecalho">
+        <h2 id="tituloQuemSomos">Quem Somos</h2>
+        <p>Instituição, professores e estudantes envolvidos na construção do projeto.</p>
+      </div>
+
+      <nav class="atalhos-secao" aria-label="Seções desta página">
+<a href="#estudantes">Estudantes</a>
+<a href="#equipe">Equipe</a>
+<a href="#parceiros">Parceiros</a>
+<a href="#creditos-equipe">Créditos</a>
+</nav>
+<div class="grid-creditos">
+<div class="painel" id="estudantes">
+          <h3>Estudantes</h3>
+          <p class="texto-corpo">Turmas e estudantes participantes da pesquisa de campo — <em>a preencher</em>.</p>
+        </div>
+<section class="painel" id="equipe">
+<h3>Equipe</h3>
+<h4>Coordenação</h4>
+<p class="texto-corpo">Professora(s) e professor(es) responsáveis — <em>a preencher</em>.</p>
+</section>
+<div class="painel" id="parceiros">
+<h3>Parceiros</h3>
+          <h3>Instituição</h3>
+          <p class="texto-corpo">Escola responsável pelo projeto — <em>a preencher</em>.</p>
+        </div>
+</div>
+<section class="painel" id="creditos-equipe" aria-labelledby="creditos-equipe-titulo">
+<h3 id="creditos-equipe-titulo">Créditos</h3>
+<p class="texto-corpo">Instituição, professores e estudantes envolvidos na construção do projeto. Os nomes dos participantes aguardam preenchimento. <a href="#creditos-finais">Ver créditos finais do site →</a>
+</p>
+</section>
+
+      <div class="painel espaco-topo">
+        <h3>Acompanhe o projeto</h3>
+        <p class="texto-corpo texto-antes-botao">
+          As publicações, bastidores das trilhas e novidades da videoteca são divulgados no Instagram do projeto.
+        </p>
+        <a class="link-instagram" data-instagram href="#" target="_blank" rel="noopener noreferrer"
+           aria-label="Instagram do projeto (abre em nova aba)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram do projeto
+        </a>
+      </div>
+    </section>
+</div>
+
+<div class="pagina" data-pagina="links" tabindex="-1" hidden>
+<section class="secao" id="links" aria-labelledby="tituloLinks">
+      <div class="secao-cabecalho">
+        <h2 id="tituloLinks">Links Úteis e Créditos</h2>
         <p>Legislações, referências e páginas institucionais que apoiam a pesquisa.</p>
       </div>
 
@@ -928,46 +1219,13 @@ ul{margin:0; padding:0; list-style:none}
         <strong>Para completar:</strong> links da escola, da Secretaria de Educação e de acervos locais podem ser
         acrescentados nesta lista.
       </p>
-    </section>
-
-    <!-- QUEM SOMOS / CRÉDITOS -->
-    <section class="secao" id="creditos" aria-labelledby="tituloCreditos">
-      <div class="secao-cabecalho">
-        <h2 id="tituloCreditos">Quem Somos / Créditos</h2>
-        <p>Instituição, professores e estudantes envolvidos na construção do projeto.</p>
-      </div>
-
-      <div class="grid-creditos">
-        <div class="painel">
-          <h3>Instituição</h3>
-          <p class="texto-corpo">Escola responsável pelo projeto — <em>a preencher</em>.</p>
-        </div>
-        <div class="painel">
-          <h3>Coordenação</h3>
-          <p class="texto-corpo">Professora(s) e professor(es) responsáveis — <em>a preencher</em>.</p>
-        </div>
-        <div class="painel">
-          <h3>Estudantes</h3>
-          <p class="texto-corpo">Turmas e estudantes participantes da pesquisa de campo — <em>a preencher</em>.</p>
-        </div>
-      </div>
-
-      <div class="painel espaco-topo">
-        <h3>Acompanhe o projeto</h3>
-        <p class="texto-corpo texto-antes-botao">
-          As publicações, bastidores das trilhas e novidades da videoteca são divulgados no Instagram do projeto.
-        </p>
-        <a class="link-instagram" data-instagram href="#" target="_blank" rel="noopener noreferrer"
-           aria-label="Instagram do projeto (abre em nova aba)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
-            <circle cx="12" cy="12" r="4.2"/>
-            <circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/>
-          </svg>
-          Instagram do projeto
-        </a>
-      </div>
-    </section>
+    <section class="painel" id="creditos-finais" aria-labelledby="creditos-finais-titulo">
+<h3 id="creditos-finais-titulo">Créditos finais do site</h3>
+<p class="texto-corpo">Estância como laboratório vivo — projeto escolar de pesquisa de campo, patrimônio local e protagonismo discente. Fotografias, vídeos e entrevistas: estudantes participantes. Instituição e coordenação: <em>a preencher</em>. <a href="#quem-somos">Conheça os participantes do projeto →</a>
+</p>
+</section>
+</section>
+</div>
 
     <!-- RODAPÉ -->
     <footer class="rodape">
@@ -1050,35 +1308,45 @@ const INSTAGRAM_URL = "COLOCAR_URL_DO_INSTAGRAM_AQUI";
   });
 })();
 
-/* ============================================================
-   3) DESTAQUE DO ITEM DE MENU CONFORME A SEÇÃO VISÍVEL
-   ============================================================ */
-(function menuAtivo(){
-  const links = Array.from(document.querySelectorAll("#navPrincipal a"));
-  const secoes = links
-    .map(function(link){ return document.querySelector(link.getAttribute("href")); })
-    .filter(Boolean);
-
-  if (!("IntersectionObserver" in window) || !secoes.length) return;
-
-  function marcar(id){
-    links.forEach(function(link){
-      if (link.getAttribute("href") === "#" + id) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
+/* Navegação entre páginas, com suporte a links diretos e histórico. */
+(function navegarPaginas(){
+  const paginas = Array.from(document.querySelectorAll('[data-pagina]'));
+  const links = Array.from(document.querySelectorAll('#navPrincipal a, .nav-rodape a'));
+  const botao = document.getElementById('alternarTrilhas');
+  const submenu = document.getElementById('submenuTrilhas');
+  const aliases = { creditos: 'quem-somos' };
+  function expandir(aberto){
+    submenu.hidden = !aberto;
+    botao.setAttribute('aria-expanded', String(aberto));
+    botao.setAttribute('aria-label', aberto ? 'Recolher trilhas' : 'Expandir trilhas');
   }
-
-  const observador = new IntersectionObserver(function(entradas){
-    const visiveis = entradas
-      .filter(function(e){ return e.isIntersecting; })
-      .sort(function(a, b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
-    if (visiveis.length) marcar(visiveis[0].target.id);
-  }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
-
-  secoes.forEach(function(secao){ observador.observe(secao); });
+  botao.addEventListener('click', function(){ expandir(submenu.hidden); });
+  function mostrar(focar){
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)) || 'inicio'; }
+    catch { id = 'inicio'; }
+    if (id === 'conteudo') {
+      document.getElementById('conteudo').focus({preventScroll:true});
+      return;
+    }
+    id = aliases[id] || id;
+    const destino = document.getElementById(id);
+    const pagina = destino && destino.closest('[data-pagina]') || paginas[0];
+    const atual = pagina.dataset.pagina;
+    paginas.forEach(function(item){ item.hidden = item !== pagina; });
+    links.forEach(function(link){
+      if (link.getAttribute('href') === '#' + atual) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+    if (atual === 'trilhas' || atual.startsWith('trilha-')) expandir(true);
+    const titulo = pagina.querySelector('h1, h2');
+    document.title = atual === 'inicio' ? 'Estância como laboratório vivo' : titulo.textContent + ' | Estância – Laboratório Vivo';
+    if (focar) pagina.focus({preventScroll:true});
+    if (destino && destino !== pagina && destino.id !== atual) destino.scrollIntoView({block:'start'});
+    else window.scrollTo({top:0,behavior:'instant'});
+  }
+  window.addEventListener('hashchange', function(){ mostrar(true); });
+  mostrar(false);
 })();
 </script>
 
