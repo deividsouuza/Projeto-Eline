@@ -11,33 +11,33 @@
 <style>
 /* ============================================================
    IDENTIDADE VISUAL — Estância Laboratório Vivo
-   Amarelo = cor de destaque | Azul escuro = cor secundária
+   Verde principal e verde escuro | Azul como cor de apoio
    ============================================================ */
 :root{
-  /* Amarelos */
-  --amarelo:        #F2C94C;
-  --amarelo-forte:  #E0B02F;
-  --amarelo-claro:  #FDF4DC;
-  --amarelo-vidro:  #FBE9B8;
-  --ambar-texto:    #7A5406;  /* amarelo escurecido, usado só em TEXTO sobre fundo claro */
+  /* Verdes da identidade visual */
+  --verde-principal:        #278B35;
+  --verde-escuro:  #185528;
+  --verde-claro:  #EAF5EB;
+  --verde-borda:  #D2E8D5;
+  --verde-texto:    #185528;  /* Verde escuro para textos sobre fundos claros */
 
   /* Azuis (secundária / contraste) */
-  --azul:           #12314F;
-  --azul-escuro:    #0C2136;
-  --azul-medio:     #234A6E;
+  --azul:           #124B6F;
+  --azul-escuro:    #124B6F;
+  --azul-medio:     #168DD0;
 
   /* Neutros */
   --branco:         #FFFFFF;
-  --cinza-fundo:    #F5F6F8;
-  --cinza-borda:    #E4E7EC;
-  --texto:          #2B3440;
-  --texto-suave:    #5A6675;
+  --cinza-fundo:    #EAF5EB;
+  --cinza-borda:    #D2E8D5;
+  --texto:          #124B6F;
+  --texto-suave:    #124B6F;
 
   /* Sistema */
   --raio:      16px;
   --raio-sm:   10px;
-  --sombra:    0 1px 2px rgba(12,33,54,.04), 0 8px 24px rgba(12,33,54,.06);
-  --sombra-md: 0 4px 10px rgba(12,33,54,.07), 0 16px 40px rgba(12,33,54,.10);
+  --sombra:    0 1px 2px rgba(24,85,40,.04), 0 8px 24px rgba(24,85,40,.06);
+  --sombra-md: 0 4px 10px rgba(24,85,40,.07), 0 16px 40px rgba(24,85,40,.10);
   --sidebar-w: 276px;
   --topbar-h:  64px;
   --fonte: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -56,20 +56,20 @@ body{
 }
 img{max-width:100%; height:auto; display:block}
 a{color:inherit}
-h1,h2,h3{color:var(--azul); line-height:1.2; margin:0}
+h1,h2,h3{color:var(--verde-escuro); line-height:1.2; margin:0}
 p{margin:0}
 ul{margin:0; padding:0; list-style:none}
 
 /* Acessibilidade -------------------------------------------------- */
 .pular-para-conteudo{
   position:absolute; left:12px; top:-100px; z-index:200;
-  background:var(--amarelo); color:var(--azul-escuro);
+  background:var(--verde-escuro); color:var(--branco);
   padding:12px 18px; border-radius:var(--raio-sm); font-weight:700;
   transition:top .18s ease;
 }
 .pular-para-conteudo:focus{top:12px}
-:focus-visible{outline:3px solid var(--amarelo-forte); outline-offset:3px; border-radius:6px}
-.hero :focus-visible,.rodape :focus-visible{outline-color:var(--amarelo)}
+:focus-visible{outline:3px solid var(--verde-escuro); outline-offset:3px; border-radius:6px}
+.hero :focus-visible,.rodape :focus-visible{outline-color:var(--branco)}
 
 /* ============================================================
    BARRA SUPERIOR (somente tablet/celular)
@@ -82,17 +82,17 @@ ul{margin:0; padding:0; list-style:none}
   padding:0 16px;
   background:var(--branco);
   border-bottom:1px solid var(--cinza-borda);
-  box-shadow:0 2px 10px rgba(12,33,54,.05);
+  box-shadow:0 2px 10px rgba(24,85,40,.05);
 }
 .botao-menu{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   min-width:48px; min-height:44px; padding:0 12px;
-  background:var(--amarelo-claro);
-  border:1px solid var(--amarelo-vidro);
+  background:var(--verde-claro);
+  border:1px solid var(--verde-borda);
   border-radius:var(--raio-sm);
   color:var(--azul); font:inherit; font-weight:600; cursor:pointer;
 }
-.botao-menu:hover{background:var(--amarelo-vidro)}
+.botao-menu:hover{background:var(--verde-borda)}
 .botao-menu svg{width:20px; height:20px}
 
 /* ============================================================
@@ -107,11 +107,11 @@ ul{margin:0; padding:0; list-style:none}
   overflow-y:auto;
   overscroll-behavior:contain;
 }
-/* Faixa amarela de identidade no topo da sidebar */
+/* Faixa verde de identidade no topo da sidebar */
 .sidebar::before{
   content:""; position:sticky; top:0; display:block;
   height:4px; flex:none;
-  background:linear-gradient(90deg,var(--amarelo) 0%,var(--amarelo-forte) 100%);
+  background:linear-gradient(90deg,var(--verde-principal) 0%,var(--verde-escuro) 100%);
 }
 
 .marca{
@@ -123,13 +123,13 @@ ul{margin:0; padding:0; list-style:none}
   flex:none;
   width:44px; height:44px;
   display:grid; place-items:center;
-  background:var(--amarelo);
-  color:var(--azul-escuro);
+  background:var(--verde-principal);
+  color:var(--branco);
   border-radius:13px;
   font-weight:800; font-size:20px;
-  box-shadow:0 4px 12px rgba(224,176,47,.35);
+  box-shadow:0 4px 12px rgba(39,139,53,.35);
 }
-.marca-nome{display:block; font-size:17px; font-weight:800; color:var(--azul); letter-spacing:-.2px}
+.marca-nome{display:block; font-size:17px; font-weight:800; color:var(--verde-escuro); letter-spacing:-.2px}
 .marca-sub{display:block; font-size:12.5px; color:var(--texto-suave); letter-spacing:.02em}
 .topbar .marca-nome{font-size:15.5px}
 
@@ -147,8 +147,8 @@ ul{margin:0; padding:0; list-style:none}
 }
 .nav a:hover{background:var(--cinza-fundo); color:var(--azul)}
 .nav a[aria-current="page"]{
-  background:var(--amarelo-claro);
-  border-left-color:var(--amarelo-forte);
+  background:var(--verde-claro);
+  border-left-color:var(--verde-escuro);
   color:var(--azul);
   font-weight:700;
 }
@@ -160,7 +160,7 @@ ul{margin:0; padding:0; list-style:none}
 }
 .bloco-titulo{
   font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
-  color:var(--ambar-texto);
+  color:var(--verde-texto);
   margin-bottom:10px;
 }
 .lista-trilhas li{
@@ -171,7 +171,7 @@ ul{margin:0; padding:0; list-style:none}
 .lista-trilhas li::before{
   content:""; flex:none;
   width:8px; height:8px; border-radius:50%;
-  background:var(--amarelo); border:1px solid var(--amarelo-forte);
+  background:var(--verde-principal); border:1px solid var(--verde-escuro);
 }
 
 .rodape-sidebar{
@@ -182,8 +182,8 @@ ul{margin:0; padding:0; list-style:none}
 .link-instagram{
   display:inline-flex; align-items:center; gap:10px;
   min-height:44px; padding:9px 14px 9px 10px;
-  background:var(--amarelo-claro);
-  border:1px solid var(--amarelo-vidro);
+  background:var(--verde-claro);
+  border:1px solid var(--verde-borda);
   border-radius:999px;
   color:var(--azul); text-decoration:none;
   font-size:14px; font-weight:600;
@@ -191,17 +191,17 @@ ul{margin:0; padding:0; list-style:none}
 }
 .link-instagram svg{width:22px; height:22px; flex:none}
 .link-instagram:hover{
-  background:var(--amarelo);
+  background:var(--verde-principal);
   transform:translateY(-1px);
-  box-shadow:0 6px 16px rgba(224,176,47,.32);
+  box-shadow:0 6px 16px rgba(39,139,53,.32);
 }
 .link-instagram[aria-disabled="true"]{opacity:.75; cursor:not-allowed}
-.link-instagram[aria-disabled="true"]:hover{transform:none; box-shadow:none; background:var(--amarelo-claro)}
+.link-instagram[aria-disabled="true"]:hover{transform:none; box-shadow:none; background:var(--verde-claro)}
 
 /* Overlay do menu no celular */
 .overlay{
   position:fixed; inset:0; z-index:65;
-  background:rgba(12,33,54,.45);
+  background:rgba(24,85,40,.45);
   opacity:0; visibility:hidden;
   transition:opacity .2s ease, visibility .2s ease;
 }
@@ -218,34 +218,32 @@ ul{margin:0; padding:0; list-style:none}
 /* Hero ------------------------------------------------------------ */
 .hero{
   position:relative; overflow:hidden;
-  background:linear-gradient(135deg,var(--azul) 0%,var(--azul-escuro) 100%);
+  background:linear-gradient(135deg,var(--verde-principal) 0%,var(--verde-escuro) 100%);
   border-radius:22px;
   padding:clamp(32px,5vw,60px);
-  color:#EAF1F8;
+  color:#FFFFFF;
   box-shadow:var(--sombra-md);
 }
-.hero::after{ /* círculo decorativo amarelo */
-  content:""; position:absolute; z-index:0;
-  right:-52px; top:50%; transform:translateY(-50%);
-  width:min(232px,29vw); aspect-ratio:1;
-  border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,var(--amarelo) 0%,var(--amarelo-forte) 62%,#C08F1B 100%);
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(24,85,40,.90),rgba(24,85,40,.72) 48%,rgba(24,85,40,.28));
+  pointer-events:none;
 }
-.hero::before{ /* anel externo do círculo decorativo */
-  content:""; position:absolute; z-index:0;
-  right:-124px; top:50%; transform:translateY(-50%);
-  width:min(400px,50vw); aspect-ratio:1;
-  border-radius:50%;
-  border:1px solid rgba(242,201,76,.30);
-}
-.hero-texto{position:relative; z-index:1; max-width:min(600px,100%)}
+.hero-fundos{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 1.4s ease}
+.hero-fundo.ativo{opacity:1}
+.hero-texto{position:relative;z-index:2;max-width:min(600px,100%)}
+.hero-controle{position:relative;z-index:2;display:flex;justify-content:flex-end;margin-top:20px}
+.hero-pausar{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(24,85,40,.65);color:var(--branco);font:inherit;font-size:12px;cursor:pointer}
+.hero-pausar:hover{background:var(--verde-escuro)}
+.hero-pausar svg{width:14px;height:14px}
 .hero-etiqueta{
   display:inline-block;
   padding:6px 14px; margin-bottom:18px;
-  background:rgba(242,201,76,.16);
-  border:1px solid rgba(242,201,76,.45);
+  background:rgba(39,139,53,.32);
+  border:1px solid rgba(255,255,255,.45);
   border-radius:999px;
-  color:var(--amarelo);
+  color:var(--branco);
   font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
 }
 .hero h1{
@@ -254,8 +252,8 @@ ul{margin:0; padding:0; list-style:none}
   font-weight:800; letter-spacing:-1px;
   margin-bottom:16px;
 }
-.hero h1 span{color:var(--amarelo); display:block}
-.hero p{font-size:clamp(15px,1.6vw,17.5px); color:#C6D5E4; max-width:44ch}
+.hero h1 span{color:var(--branco); display:block}
+.hero p{font-size:clamp(15px,1.6vw,17.5px); color:#EAF5EB; max-width:44ch}
 .hero-botoes{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
 
 .btn{
@@ -267,21 +265,21 @@ ul{margin:0; padding:0; list-style:none}
   transition:background .16s ease, transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
 .btn-primario{
-  background:var(--amarelo); color:var(--azul-escuro);
-  box-shadow:0 6px 18px rgba(242,201,76,.28);
+  background:var(--verde-escuro); color:var(--branco);
+  box-shadow:0 6px 18px rgba(39,139,53,.28);
 }
-.btn-primario:hover{background:var(--amarelo-forte); transform:translateY(-2px)}
+.btn-primario:hover{background:var(--verde-escuro); transform:translateY(-2px)}
 .btn-secundario{background:transparent; color:var(--branco); border-color:rgba(255,255,255,.55)}
-.btn-secundario:hover{border-color:var(--amarelo); color:var(--amarelo)}
+.btn-secundario:hover{border-color:var(--branco);color:var(--branco);background:rgba(255,255,255,.12)}
 
 /* Seções ----------------------------------------------------------- */
 .secao{padding-top:56px}
 .secao-cabecalho{margin-bottom:24px; max-width:70ch}
 .secao h2{font-size:clamp(22px,2.6vw,29px); font-weight:800; letter-spacing:-.5px}
-.secao h2::after{ /* detalhe amarelo sob o título */
+.secao h2::after{ /* detalhe verde sob o título */
   content:""; display:block;
   width:46px; height:4px; margin-top:12px;
-  background:var(--amarelo); border-radius:2px;
+  background:var(--verde-principal); border-radius:2px;
 }
 .secao-cabecalho p{margin-top:14px; color:var(--texto-suave); font-size:15.5px}
 
@@ -303,23 +301,23 @@ ul{margin:0; padding:0; list-style:none}
 .card:hover{
   transform:translateY(-3px);
   box-shadow:var(--sombra-md);
-  border-color:var(--amarelo-vidro);
+  border-color:var(--verde-borda);
 }
 .card-icone{
   width:46px; height:46px; margin-bottom:16px;
   display:grid; place-items:center;
-  background:var(--amarelo-claro);
-  border:1px solid var(--amarelo-vidro);
+  background:var(--verde-claro);
+  border:1px solid var(--verde-borda);
   border-radius:13px;
   color:var(--azul);
 }
-.card:hover .card-icone{background:var(--amarelo); border-color:var(--amarelo-forte)}
+.card:hover .card-icone{background:var(--verde-principal); border-color:var(--verde-escuro)}
 .card-icone svg{width:22px; height:22px}
 .card h3{font-size:17px; font-weight:700; margin-bottom:8px}
 .card p{font-size:14.5px; color:var(--texto-suave)}
 .card-seta{
   margin-top:16px;
-  font-size:13.5px; font-weight:700; color:var(--ambar-texto);
+  font-size:13.5px; font-weight:700; color:var(--verde-texto);
 }
 
 /* Blocos de texto -------------------------------------------------- */
@@ -340,8 +338,8 @@ ul{margin:0; padding:0; list-style:none}
 .texto-antes-botao{margin-bottom:16px}
 
 .destaque{
-  border-left:4px solid var(--amarelo);
-  background:var(--amarelo-claro);
+  border-left:4px solid var(--verde-principal);
+  background:var(--verde-claro);
   border-radius:var(--raio-sm);
   padding:18px 20px;
   font-size:15px;
@@ -365,12 +363,12 @@ ul{margin:0; padding:0; list-style:none}
 }
 .trilha::before{
   content:""; position:absolute; inset:0 auto 0 0;
-  width:5px; background:var(--amarelo);
+  width:5px; background:var(--verde-principal);
 }
 .trilha-numero{
   display:inline-grid; place-items:center;
   width:30px; height:30px; margin-bottom:12px;
-  background:var(--azul); color:var(--amarelo);
+  background:var(--verde-escuro); color:var(--branco);
   border-radius:9px;
   font-size:14px; font-weight:800;
 }
@@ -381,10 +379,10 @@ ul{margin:0; padding:0; list-style:none}
 .etiquetas{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
 .etiqueta{
   padding:5px 11px;
-  background:var(--amarelo-claro);
-  border:1px solid var(--amarelo-vidro);
+  background:var(--verde-claro);
+  border:1px solid var(--verde-borda);
   border-radius:999px;
-  font-size:12.5px; font-weight:600; color:var(--ambar-texto);
+  font-size:12.5px; font-weight:600; color:var(--verde-texto);
 }
 
 /* Galeria / vídeos: espaços reservados ---------------------------- */
@@ -404,7 +402,7 @@ ul{margin:0; padding:0; list-style:none}
   aspect-ratio:4/3;
   display:grid; place-items:center;
   background:
-    linear-gradient(135deg,var(--amarelo-claro) 0%,#F1F3F6 100%);
+    linear-gradient(135deg,var(--verde-claro) 0%,#EAF5EB 100%);
   color:var(--azul-medio);
   border-bottom:1px solid var(--cinza-borda);
 }
@@ -420,15 +418,15 @@ ul{margin:0; padding:0; list-style:none}
   min-height:56px; padding:14px 18px;
   background:var(--branco);
   border:1px solid var(--cinza-borda);
-  border-left:4px solid var(--amarelo);
+  border-left:4px solid var(--verde-principal);
   border-radius:var(--raio-sm);
   text-decoration:none;
   transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-.item-link:hover{background:var(--amarelo-claro); transform:translateX(3px); box-shadow:var(--sombra)}
+.item-link:hover{background:var(--verde-claro); transform:translateX(3px); box-shadow:var(--sombra)}
 .item-link strong{display:block; font-size:15px; color:var(--azul)}
 .item-link span{font-size:13.5px; color:var(--texto-suave)}
-.item-link svg{width:18px; height:18px; margin-left:auto; flex:none; color:var(--ambar-texto)}
+.item-link svg{width:18px; height:18px; margin-left:auto; flex:none; color:var(--verde-texto)}
 
 /* Créditos --------------------------------------------------------- */
 .grid-creditos{
@@ -440,9 +438,9 @@ ul{margin:0; padding:0; list-style:none}
 .rodape{
   margin-top:56px;
   padding:30px clamp(20px,3vw,34px);
-  background:var(--azul);
+  background:var(--verde-escuro);
   border-radius:var(--raio);
-  color:#BFD0E0;
+  color:#EAF5EB;
   display:flex; flex-wrap:wrap; gap:18px;
   align-items:center; justify-content:space-between;
 }
@@ -452,15 +450,15 @@ ul{margin:0; padding:0; list-style:none}
 .instagram-rodape{
   display:inline-flex; align-items:center; gap:10px;
   min-height:48px; padding:11px 20px 11px 16px;
-  background:var(--amarelo); color:var(--azul-escuro);
+  background:var(--verde-escuro); color:var(--branco);
   border-radius:999px;
   font-size:14.5px; font-weight:700; text-decoration:none;
   transition:background .15s ease, transform .15s ease;
 }
 .instagram-rodape svg{width:22px; height:22px}
-.instagram-rodape:hover{background:var(--amarelo-forte); transform:translateY(-2px)}
+.instagram-rodape:hover{background:var(--verde-escuro); transform:translateY(-2px)}
 .instagram-rodape[aria-disabled="true"]{opacity:.8; cursor:not-allowed}
-.instagram-rodape[aria-disabled="true"]:hover{transform:none; background:var(--amarelo)}
+.instagram-rodape[aria-disabled="true"]:hover{transform:none; background:var(--verde-principal)}
 
 /* ============================================================
    RESPONSIVIDADE
@@ -472,7 +470,7 @@ ul{margin:0; padding:0; list-style:none}
     width:min(300px,84vw);
     transform:translateX(-102%);
     transition:transform .24s ease;
-    box-shadow:0 0 40px rgba(12,33,54,.18);
+    box-shadow:0 0 40px rgba(24,85,40,.18);
   }
   body.menu-aberto .sidebar{transform:translateX(0)}
   body.menu-aberto .overlay{opacity:1; visibility:visible}
@@ -480,12 +478,8 @@ ul{margin:0; padding:0; list-style:none}
 }
 @media (max-width:640px){
   .hero{border-radius:18px}
-  .hero::after{ /* no celular vira um anel: não interfere na leitura do texto */
-    width:172px; right:-62px; top:-62px; transform:none;
-    background:none; border:2px solid rgba(242,201,76,.55);
-  }
-  .hero::before{display:none}
-  .hero-botoes .btn{flex:1 1 100%}
+  .hero::after{background:linear-gradient(90deg,rgba(24,85,40,.88),rgba(24,85,40,.62))}
+.hero-botoes .btn{flex:1 1 100%}
   .secao{padding-top:44px}
   .rodape{flex-direction:column; align-items:flex-start}
   .rodape-social{width:100%}
@@ -503,7 +497,7 @@ ul{margin:0; padding:0; list-style:none}
 .linha-trilhas{display:flex;align-items:stretch}
 .linha-trilhas>a{flex:1;min-width:0;padding-right:4px}
 .alternar-trilhas{flex:none;width:32px;min-height:44px;padding:6px;border:0;background:transparent;color:var(--texto-suave);border-radius:8px;cursor:pointer}
-.alternar-trilhas:hover{background:var(--amarelo-claro)}
+.alternar-trilhas:hover{background:var(--verde-claro)}
 .alternar-trilhas svg{width:18px;height:18px;transition:transform .15s}
 .alternar-trilhas[aria-expanded="true"] svg{transform:rotate(180deg)}
 .submenu-trilhas{padding-left:16px;margin:4px 0 10px}
@@ -516,19 +510,19 @@ ul{margin:0; padding:0; list-style:none}
 .pagina h2{scroll-margin-top:90px}
 .atalhos-secao{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 .atalhos-secao a{padding:7px 12px;border-radius:999px;border:1px solid var(--cinza-borda);background:var(--branco);font-size:13px;text-decoration:none;color:var(--azul)}
-.atalhos-secao a:hover{background:var(--amarelo-claro)}
+.atalhos-secao a:hover{background:var(--verde-claro)}
 .pagina .painel+.painel{margin-top:20px}
-.mapa-projeto{display:grid;gap:16px;margin-top:18px;padding:24px;border:1px solid var(--amarelo-vidro);border-radius:var(--raio-sm);background:var(--amarelo-claro)}
+.mapa-projeto{display:grid;gap:16px;margin-top:18px;padding:24px;border:1px solid var(--verde-borda);border-radius:var(--raio-sm);background:var(--verde-claro)}
 .mapa-projeto .btn{justify-self:start;white-space:normal;text-align:center}
-.mapa-projeto-etiqueta{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ambar-texto)}
+.mapa-projeto-etiqueta{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--verde-texto)}
 .mapa-instrucao{font-size:13px;color:var(--texto-suave)}
 .mapa-acesso-geral{display:grid;justify-items:start;gap:12px;margin-top:20px}
 .midia-video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--azul-escuro)}
-.video-download{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--ambar-texto)}
+.video-download{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--verde-texto)}
 @media(max-width:640px){.mapa-projeto{padding:18px}.mapa-projeto .btn{width:100%}}
 .roteiro{list-style:decimal;padding-left:24px;margin-top:14px}
 .roteiro li+li{margin-top:10px}
-.voltar-trilhas{display:inline-flex;gap:8px;margin-bottom:20px;color:var(--ambar-texto);font-weight:600}
+.voltar-trilhas{display:inline-flex;gap:8px;margin-bottom:20px;color:var(--verde-texto);font-weight:600}
 .card .ponto-trilha{display:inline-block;margin-right:8px;vertical-align:middle}
 
 
@@ -537,8 +531,19 @@ ul{margin:0; padding:0; list-style:none}
 .colecao-cabecalho{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:16px}
 .colecao-cabecalho p{font-size:13px;color:var(--texto-suave)}
 .foto-ampliar{display:block;background:var(--cinza-fundo)}
-.foto-galeria{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#EEF1F4;border-bottom:1px solid var(--cinza-borda)}
-.foto-ampliar:hover{box-shadow:inset 0 0 0 2px var(--amarelo-forte)}
+.foto-galeria{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#EAF5EB;border-bottom:1px solid var(--cinza-borda)}
+.foto-ampliar:hover{box-shadow:inset 0 0 0 2px var(--verde-escuro)}
+
+/* Aplicacao da paleta verde com azuis de apoio. */
+.nav a[aria-current="page"]{color:var(--verde-escuro)}
+.card-icone{color:var(--azul-medio)}
+.card:hover .card-icone{background:var(--verde-claro);color:var(--verde-escuro)}
+.card h3,.midia-legenda strong,.item-link strong{color:var(--verde-escuro)}
+.hero .btn-primario{background:var(--branco);color:var(--verde-escuro);box-shadow:0 6px 18px rgba(24,85,40,.18)}
+.hero .btn-primario:hover{background:var(--verde-claro)}
+.rodape .instagram-rodape{background:var(--branco);color:var(--verde-escuro)}
+.rodape .instagram-rodape:hover{background:var(--verde-claro)}
+.link-instagram:hover{background:var(--verde-claro);border-color:var(--verde-principal);color:var(--verde-escuro)}
 </style>
 </head>
 <body>
@@ -580,19 +585,19 @@ ul{margin:0; padding:0; list-style:none}
 </a><button class="alternar-trilhas" id="alternarTrilhas" type="button" aria-expanded="false" aria-controls="submenuTrilhas" aria-label="Expandir trilhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
 </div>
     <div class="submenu-trilhas" id="submenuTrilhas" hidden>
-<a href="#trilha-quilombolas"><span class="ponto-trilha" style="--cor-trilha:#D64F86" aria-hidden="true"></span><span>Trilha dos Quilombolas</span>
+<a href="#trilha-quilombolas"><span class="ponto-trilha" style="--cor-trilha:#278B35" aria-hidden="true"></span><span>Trilha dos Quilombolas</span>
 </a>
-<a href="#trilha-cidade-nova"><span class="ponto-trilha" style="--cor-trilha:#34845A" aria-hidden="true"></span><span>Cidade Nova: Um Novo Olhar</span>
+<a href="#trilha-cidade-nova"><span class="ponto-trilha" style="--cor-trilha:#185528" aria-hidden="true"></span><span>Cidade Nova: Um Novo Olhar</span>
 </a>
-<a href="#trilha-industrias"><span class="ponto-trilha" style="--cor-trilha:#3979C3" aria-hidden="true"></span><span>Indústrias Além do Tempo</span>
+<a href="#trilha-industrias"><span class="ponto-trilha" style="--cor-trilha:#168DD0" aria-hidden="true"></span><span>Indústrias Além do Tempo</span>
 </a>
-<a href="#trilha-operarios"><span class="ponto-trilha" style="--cor-trilha:#D47A30" aria-hidden="true"></span><span>Operários da Memória</span>
+<a href="#trilha-operarios"><span class="ponto-trilha" style="--cor-trilha:#124B6F" aria-hidden="true"></span><span>Operários da Memória</span>
 </a>
 </div>
   </div>
-  <a href="#galeria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg><span>Galeria de Registros</span>
+  <a href="#educacao-territorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4ZM4 20c2-5 6-8 11-9.5"/></svg><span>Educação e Território</span>
 </a>
-<a href="#educacao-territorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4ZM4 20c2-5 6-8 11-9.5"/></svg><span>Educação e Território</span>
+<a href="#galeria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg><span>Galeria de Registros</span>
 </a>
 <a href="#quem-somos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-4-5"/></svg><span>Quem Somos</span>
 </a>
@@ -620,6 +625,15 @@ ul{margin:0; padding:0; list-style:none}
 
 <div class="pagina" data-pagina="inicio" tabindex="-1">    <!-- HERO -->
     <section class="hero" id="inicio">
+      <div class="hero-fundos" aria-hidden="true">
+        <img class="hero-fundo ativo" src="Imagem%20Fundo/IMAGEMFUNDO.jpeg" alt="" decoding="async" fetchpriority="high">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO2.jpeg" alt="" decoding="async">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO3.jpeg" alt="" decoding="async">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO4.jpeg" alt="" decoding="async">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO5.jpeg" alt="" decoding="async">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO6.jpeg" alt="" decoding="async">
+        <img class="hero-fundo" data-src="Imagem%20Fundo/IMAGEMFUNDO7.jpeg" alt="" decoding="async">
+      </div>
       <div class="hero-texto">
         <span class="hero-etiqueta">Pesquisa de campo escolar</span>
         <h1>Estância como<span>laboratório vivo</span>
@@ -630,6 +644,7 @@ ul{margin:0; padding:0; list-style:none}
           <a class="btn btn-secundario" href="#galeria">Ver galeria</a>
         </div>
       </div>
+    <div class="hero-controle"><button class="hero-pausar" id="pausarFundos" type="button" aria-label="Pausar troca de imagens de fundo" hidden><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg><span>Pausar imagens</span></button></div>
     </section>
 <section class="secao" aria-labelledby="tituloExplore">
 <div class="secao-cabecalho">
@@ -645,13 +660,13 @@ ul{margin:0; padding:0; list-style:none}
 <h3>Explore as Trilhas</h3>
 <p>Mapas, pontos de parada e análises das 4 trilhas.</p><span class="card-seta">Explorar →</span>
 </a>
-<a class="card" href="#galeria"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg></span>
-<h3>Galeria de Registros</h3>
-<p>Galeria de campo com registros dos alunos. Vídeos e entrevistas produzidos pelos alunos.</p><span class="card-seta">Explorar →</span>
-</a>
 <a class="card" href="#educacao-territorio"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1-5-5C4 6.5 11.5 3 20 4ZM4 20c2-5 6-8 11-9.5"/></svg></span>
 <h3>Educação e Território</h3>
 <p>Justiça ambiental, ancestralidade e resistência negra.</p><span class="card-seta">Explorar →</span>
+</a>
+<a class="card" href="#galeria"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="15" height="15" rx="2"/><path d="M3 7v14h14M6 14l4-4 5 5 3-3 3 3"/><circle cx="16" cy="7" r="1"/></svg></span>
+<h3>Galeria de Registros</h3>
+<p>Galeria de campo com registros dos alunos. Vídeos e entrevistas produzidos pelos alunos.</p><span class="card-seta">Explorar →</span>
 </a>
 <a class="card" href="#quem-somos"><span class="card-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-4-5"/></svg></span>
 <h3>Quem Somos</h3>
@@ -682,10 +697,7 @@ ul{margin:0; padding:0; list-style:none}
 <div class="painel" id="apresentacao">
 <h3>Apresentação</h3>
         <p class="texto-corpo">
-          O projeto <strong>Estância como laboratório vivo</strong> parte de uma ideia simples: a cidade não é
-          apenas o lugar onde a escola está, ela é conteúdo. Ruas, casarões, rios, praças, portos e bairros
-          guardam camadas de memória que podem ser lidas, fotografadas, questionadas e registradas pelos
-          próprios estudantes.
+          O projeto Estância como Laboratório Vivo: território, modos de vida e experimentação socioespacial é uma iniciativa de ensino desenvolvida pelo Instituto Federal de Sergipe (IFS) – Campus Estância, com apoio institucional da Diretoria de Ensino, Pesquisa e Sociedade (DEPS) e da Pró-Reitoria de Ensino (PROEN/IFS). A proposta envolve aproximadamente 95 estudantes do Ensino Médio Integrado, dos cursos de Edificações, Eletrotécnica, Programação de Jogos Digitais e Sistemas de Energias Renováveis, articulando conhecimentos das Ciências Humanas e da formação técnica. Fundamentado na Educação Ambiental Crítica, na Educação Antirracista e no protagonismo estudantil, o projeto transforma a cidade em um espaço de investigação, aprendizagem e produção de conhecimento, incentivando os jovens a compreender a história, as paisagens, os modos de vida, o patrimônio cultural e os desafios socioambientais de Estância. Por meio de oficinas, pesquisas, aulas de campo e produção de materiais educativos, os estudantes desenvolvem novas formas de compreender e valorizar o território, reconhecendo a cidade como um espaço de memórias, identidades, desigualdades e possibilidades de transformação social.
         </p>
 
       </div>
@@ -696,11 +708,8 @@ ul{margin:0; padding:0; list-style:none}
       </div>
 
       <div class="painel">
-        <h3 id="metodologia">Metodologia</h3>        <p class="texto-corpo">
-          A metodologia combina estudo prévio em sala, saída de campo com roteiro definido, registro
-          fotográfico e audiovisual, entrevistas com moradores e devolutiva pública dos resultados. Cada
-          trilha percorrida vira material didático produzido pela turma.
-        </p>
+        <h3 id="metodologia">Metodologia</h3>
+        <p class="texto-corpo">O projeto adota uma metodologia qualitativa, investigativa, interdisciplinar e colaborativa, articulando atividades em sala de aula, oficinas temáticas, visitas técnicas e produção de materiais educativos. As ações envolvem pesquisas sobre a realidade local, análise de dados, entrevistas com moradores, observação das paisagens, registros fotográficos e audiovisuais e utilização de ferramentas de cartografia digital. A investigação contempla diferentes territórios de Estância, como a Comunidade Quilombola Porto D’Areia, Santa Cruz, Centro Histórico, Cidade Nova, Bonfim e Distrito Industrial. </p>
 <h3>Como funciona uma saída de campo</h3>
         <div class="grid-trilhas">
           <div class="trilha">
@@ -722,11 +731,24 @@ ul{margin:0; padding:0; list-style:none}
       </div>
     <section class="painel" id="oficinas" aria-labelledby="oficinas-titulo">
 <h3 id="oficinas-titulo">Oficinas</h3>
-<p class="texto-corpo">Edição do material, produção dos vídeos e apresentação para a comunidade escolar. Os registros específicos das oficinas serão acrescentados aqui.</p>
+<h4>Oficina de Linguagem Audiovisual</h4>
+<p class="texto-corpo">Os estudantes conheceram técnicas de produção de fotografias e vídeos, explorando o audiovisual como ferramenta de pesquisa, registro e comunicação das experiências vivenciadas na cidade.</p>
+<h4>Oficina de Povos e Comunidades Tradicionais</h4>
+<p class="texto-corpo">Com a participação de Wellington Quilombola, liderança da Comunidade Quilombola Porto D’Areia, a atividade promoveu reflexões sobre história, identidade, territorialidade, modos de vida e lutas das comunidades tradicionais, valorizando a escuta e os saberes locais.</p>
+<h4>Oficina de Cartografia Digital</h4>
+<p class="texto-corpo">Com a utilização do Google Earth Pro, os estudantes desenvolveram habilidades de localização, identificação de pontos de interesse, delimitação de áreas e elaboração de percursos, utilizando as geotecnologias como instrumentos de leitura e representação do espaço geográfico.</p>
 </section>
 <section class="painel" id="visitas-tecnicas" aria-labelledby="visitas-tecnicas-titulo">
 <h3 id="visitas-tecnicas-titulo">Visitas Técnicas</h3>
-<p class="texto-corpo">Percurso guiado com pontos de parada, registro fotográfico, anotações e entrevistas. Os registros específicos das visitas técnicas serão acrescentados aqui.</p>
+<p class="texto-corpo">As visitas técnicas transformam diferentes espaços de Estância em ambientes de aprendizagem, aproximando os estudantes das histórias, paisagens, memórias e dinâmicas socioambientais da cidade. Por meio da observação, de entrevistas e de registros de campo, os participantes investigam as relações entre sociedade, natureza e território, reconhecendo a diversidade de sujeitos e experiências que constituem o município.</p>
+<h4>Comunidade Quilombola Porto D’Areia</h4>
+<p class="texto-corpo">A visita possibilitou conhecer a história, as territorialidades e os modos de vida da comunidade quilombola, com destaque para as memórias locais, a pesca artesanal, o patrimônio cultural e os desafios socioambientais. O diálogo com moradores e lideranças contribuiu para valorizar saberes historicamente invisibilizados.</p>
+<h4>Santa Cruz e Centro Histórico</h4>
+<p class="texto-corpo">O percurso permitiu investigar as transformações econômicas e urbanas de Estância, especialmente aquelas relacionadas à industrialização têxtil. A observação da antiga Fábrica Santa Cruz, da Vila Operária e de espaços do Centro Histórico possibilitou relacionar trabalho, memória, patrimônio arquitetônico e organização do espaço urbano.</p>
+<h4>Cidade Nova</h4>
+<p class="texto-corpo">A visita promoveu uma leitura crítica das transformações do bairro, de seus espaços públicos, equipamentos urbanos e referências culturais. Os estudantes investigaram as memórias, as formas de ocupação, as manifestações culturais e os desafios socioespaciais de um território marcado pela expansão urbana e pela diversidade de experiências de seus moradores.</p>
+<h4>Bonfim</h4>
+<p class="texto-corpo">Este percurso integra a investigação das transformações produtivas e socioambientais de Estância, com atenção às atividades industriais, aos usos do território, às mudanças na paisagem e às relações entre desenvolvimento econômico, trabalho e meio ambiente.</p>
 </section>
 </section>
 </div>
@@ -735,23 +757,29 @@ ul{margin:0; padding:0; list-style:none}
 <section class="secao" id="trilhas" aria-labelledby="tituloTrilhas">
 <div class="secao-cabecalho">
 <h2 id="tituloTrilhas">Explore as Trilhas</h2>
-<p>Quatro percursos de campo que organizam a pesquisa dos estudantes pela cidade.</p>
+</div>
+<div class="painel">
+<h3>Conheça Estância: história, cultura e território</h3>
+<p class="texto-corpo">Localizada no sul de Sergipe, Estância destaca-se por sua importância histórica, cultural e econômica. Conhecida como “Cidade Jardim”, tem sua formação ligada à bacia do Rio Piauí, aos engenhos açucareiros e à industrialização.</p>
+<p class="texto-corpo">Seu patrimônio cultural permanece vivo em manifestações como os festejos juninos e o tradicional barco de fogo. A cidade também abriga comunidades tradicionais, como quilombolas e pescadores artesanais do Porto d’Areia, cujos saberes e modos de vida integram a riqueza sociocultural e ambiental do município.</p>
+<p class="texto-corpo">Entre tradições, desenvolvimento urbano e desafios socioambientais, Estância revela diferentes histórias e paisagens.</p>
+<p class="texto-corpo"><strong>Explore nossas trilhas e descubra Estância por novos olhares!</strong></p>
 </div>
 <div class="grid-cards">
 <a class="card" href="#trilha-quilombolas">
-<h3><span class="ponto-trilha" style="--cor-trilha:#D64F86" aria-hidden="true"></span>Trilha dos Quilombolas</h3>
+<h3><span class="ponto-trilha" style="--cor-trilha:#278B35" aria-hidden="true"></span>Trilha dos Quilombolas</h3>
 <p>Ancestralidade, saberes tradicionais e resistência negra no território de Estância.</p><span class="card-seta">Explorar →</span>
 </a>
 <a class="card" href="#trilha-cidade-nova">
-<h3><span class="ponto-trilha" style="--cor-trilha:#34845A" aria-hidden="true"></span>Cidade Nova: Um Novo Olhar</h3>
+<h3><span class="ponto-trilha" style="--cor-trilha:#185528" aria-hidden="true"></span>Cidade Nova: Um Novo Olhar</h3>
 <p>Expansão urbana, moradia e vida de bairro: como a cidade cresceu e quem construiu esse crescimento.</p><span class="card-seta">Explorar →</span>
 </a>
 <a class="card" href="#trilha-industrias">
-<h3><span class="ponto-trilha" style="--cor-trilha:#3979C3" aria-hidden="true"></span>Indústrias Além do Tempo</h3>
+<h3><span class="ponto-trilha" style="--cor-trilha:#168DD0" aria-hidden="true"></span>Indústrias Além do Tempo</h3>
 <p>Trabalho, patrimônio e transformações da cidade ao longo do tempo.</p><span class="card-seta">Explorar →</span>
 </a>
 <a class="card" href="#trilha-operarios">
-<h3><span class="ponto-trilha" style="--cor-trilha:#D47A30" aria-hidden="true"></span>Operários da Memória</h3>
+<h3><span class="ponto-trilha" style="--cor-trilha:#124B6F" aria-hidden="true"></span>Operários da Memória</h3>
 <p>Memórias do trabalho e do cotidiano, registradas na oralidade e nas histórias dos moradores.</p><span class="card-seta">Explorar →</span>
 </a>
 </div>
@@ -1194,15 +1222,14 @@ ul{margin:0; padding:0; list-style:none}
   </video>
   <div class="midia-legenda"><strong>Bairro Bonfim até Distrito Federal</strong><span id="video-bonfim-descricao">Registro audiovisual do percurso de Bonfim até Distrito Federal.</span><a class="video-download" href="Fotos%20e%20V%C3%ADdeos/Bairro%20bonfim%20at%C3%A9%20Distrito%20federal.mp4" download>Baixar vídeo (MP4)</a></div>
 </article>
-<article class="midia">
-          <div class="midia-espaco" role="img" aria-label="Espaço reservado para entrevista com moradores">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-              <rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5"/>
-            </svg>
-          </div>
-          <div class="midia-legenda"><strong>Entrevistas com moradores</strong><span>Vídeo a publicar</span>
+<article class="midia" id="video-santa-cruz-centro">
+  <video class="midia-video" controls playsinline preload="metadata" aria-label="Bairro Santa Cruz até Centro" aria-describedby="video-santa-cruz-centro-descricao">
+    <source src="Fotos%20e%20V%C3%ADdeos/Bairro%20Santa%20Cruz%20at%C3%A9%20Centro.mp4" type="video/mp4">
+    Seu navegador não reproduz este vídeo. <a href="Fotos%20e%20V%C3%ADdeos/Bairro%20Santa%20Cruz%20at%C3%A9%20Centro.mp4">Abrir o arquivo MP4</a>.
+  </video>
+  <div class="midia-legenda"><strong>Bairro Santa Cruz até Centro</strong><span id="video-santa-cruz-centro-descricao">Registro audiovisual do percurso de Santa Cruz até Centro.</span><a class="video-download" href="Fotos%20e%20V%C3%ADdeos/Bairro%20Santa%20Cruz%20at%C3%A9%20Centro.mp4" download>Baixar vídeo (MP4)</a></div>
+</article>
 </div>
-        </article></div>
 </section>
 </section>
 </div>
@@ -1221,20 +1248,13 @@ ul{margin:0; padding:0; list-style:none}
 </nav>
 <div class="painel" id="meio-ambiente">
 <h3>Meio Ambiente</h3>
-<p class="texto-corpo">Meio Ambiente e Questão Racial</p>
-        <p class="texto-corpo">
-          Pensar o meio ambiente na cidade é também perguntar <strong>quem sofre primeiro</strong> com enchentes,
-          poluição dos rios, falta de saneamento e ausência de áreas verdes. Essa pergunta liga a questão
-          ambiental à questão racial: no Brasil, os territórios mais vulneráveis são majoritariamente negros
-          e periféricos.
-        </p>
+<p class="texto-corpo">Estância possui uma rica diversidade ambiental, formada por rios, manguezais, praias, dunas e restingas. Entretanto, o crescimento urbano, a expansão das atividades econômicas e a ocupação desordenada do território têm provocado desafios como a poluição dos rios, o descarte inadequado de resíduos, a deficiência no saneamento básico e a degradação dos ecossistemas naturais.</p>
 </div>
 <div class="painel" id="relacoes-etnico-raciais">
 <h3>Relações Étnico-Raciais</h3>
-<p class="texto-corpo">Nas trilhas, os estudantes observam essa desigualdade concretamente e a relacionam com a história da
-          população negra na região, com os saberes tradicionais sobre as águas e a terra e com as formas de
-          resistência cultural que seguem vivas nas festas, na religiosidade e na oralidade.
-        </p>
+<p class="texto-corpo">Esses problemas não atingem a população de maneira igual. Comunidades tradicionais, como quilombolas e pescadores artesanais, mantêm relações históricas com os rios, manguezais e demais recursos naturais, fundamentais para seus modos de vida, trabalho e identidade cultural.</p>
+<p class="texto-corpo">A degradação desses ambientes pode intensificar desigualdades socioambientais e situações de injustiça e racismo ambiental, especialmente quando populações historicamente marginalizadas são mais afetadas pelos impactos e têm menor acesso às políticas de proteção ambiental.</p>
+<p class="texto-corpo">As Trilhas Interpretativas Urbanas de Estância convidam à reflexão sobre essas questões, relacionando as transformações da paisagem, as desigualdades socioespaciais e a valorização dos saberes locais. Conhecer esses territórios é também compreender a importância da justiça ambiental, do direito à cidade e da preservação do patrimônio natural e cultural para as gerações presentes e futuras.</p>
       </div>
 
       <div class="grid-cards">
@@ -1277,35 +1297,53 @@ ul{margin:0; padding:0; list-style:none}
 <section class="secao" id="quem-somos" aria-labelledby="tituloQuemSomos">
       <div class="secao-cabecalho">
         <h2 id="tituloQuemSomos">Quem Somos</h2>
-        <p>Instituição, professores e estudantes envolvidos na construção do projeto.</p>
+        <p>Conheça os estudantes, docentes, instituições e parceiros que fazem da cidade de Estância um espaço de aprendizagem, pesquisa e valorização do território.</p>
       </div>
 
       <nav class="atalhos-secao" aria-label="Seções desta página">
 <a href="#estudantes">Estudantes</a>
-<a href="#equipe">Equipe</a>
-<a href="#parceiros">Parceiros</a>
-<a href="#creditos-equipe">Créditos</a>
 </nav>
 <div class="grid-creditos">
 <div class="painel" id="estudantes">
           <h3>Estudantes</h3>
-          <p class="texto-corpo">Turmas e estudantes participantes da pesquisa de campo — <em>a preencher</em>.</p>
+          <p class="texto-corpo">O projeto envolve aproximadamente 95 estudantes do 2º ano do Ensino Médio Integrado do Instituto Federal de Sergipe (IFS) – Campus Estância, dos cursos técnicos de:</p>
+          <ul>
+            <li>Edificações;</li>
+            <li>Eletrotécnica;</li>
+            <li>Programação de Jogos Digitais;</li>
+            <li>Sistemas de Energias Renováveis.</li>
+          </ul>
+          <p class="texto-corpo">Os estudantes são protagonistas das atividades de pesquisa, oficinas, visitas técnicas e produção das Trilhas Interpretativas Urbanas de Estância.</p>
         </div>
 <section class="painel" id="equipe">
-<h3>Equipe</h3>
 <h4>Coordenação</h4>
-<p class="texto-corpo">Professora(s) e professor(es) responsáveis — <em>a preencher</em>.</p>
+<p class="texto-corpo">Prof.ª Dr.ª Eline Almeida Santos – Geografia</p>
+<h4>Professores colaboradores</h4>
+<ul>
+  <li>Prof.ª Talita Cabral Machado – Geografia</li>
+  <li>Prof. Gabriel Dienstmann – História</li>
+  <li>Prof. José Horimo Medeiros dos Santos – Sociologia</li>
+</ul>
 </section>
 <div class="painel" id="parceiros">
-<h3>Parceiros</h3>
-          <h3>Instituição</h3>
-          <p class="texto-corpo">Escola responsável pelo projeto — <em>a preencher</em>.</p>
+          <h4>Parceiro comunitário</h4>
+          <p class="texto-corpo">Associação dos Moradores e Amigos Remanescentes de Quilombo do Bairro Porto D’Areia.</p>
+          <h4>Apoio institucional</h4>
+          <ul>
+            <li>Instituto Federal de Sergipe (IFS) – Campus Estância</li>
+            <li>Diretoria de Educação Profissional e Superior (DEPS)</li>
+            <li>Pró-Reitoria de Ensino (PROEN/IFS)</li>
+          </ul>
         </div>
 </div>
 <section class="painel" id="creditos-equipe" aria-labelledby="creditos-equipe-titulo">
 <h3 id="creditos-equipe-titulo">Créditos</h3>
-<p class="texto-corpo">Instituição, professores e estudantes envolvidos na construção do projeto. Os nomes dos participantes aguardam preenchimento. <a href="#creditos-finais">Ver créditos finais do site →</a>
-</p>
+<p class="texto-corpo">O projeto Estância como Laboratório Vivo é desenvolvido coletivamente por estudantes e docentes do IFS – Campus Estância, com a colaboração de profissionais da educação, instituições e representantes das comunidades locais.</p>
+<p class="texto-corpo">A iniciativa valoriza o protagonismo estudantil, os saberes comunitários e a construção compartilhada do conhecimento sobre o território estanciano.</p>
+<p class="texto-corpo"><strong>Coordenação:</strong> Eline Almeida Santos.</p>
+<p class="texto-corpo"><strong>Realização:</strong> Instituto Federal de Sergipe – Campus Estância.</p>
+<p class="texto-corpo"><strong>Apoio institucional:</strong> DEPS e PROEN/IFS.</p>
+<p class="texto-corpo"><strong>Parceria comunitária:</strong> Associação dos Moradores e Amigos Remanescentes de Quilombo do Bairro Porto D’Areia.</p>
 </section>
 
       <div class="painel espaco-topo">
@@ -1490,6 +1528,52 @@ const INSTAGRAM_URL = "https://www.instagram.com/projetoestancialab?rpxt=c2N4d2l
   window.addEventListener('hashchange', function(){ mostrar(true); });
   mostrar(false);
 })();
+
+/* Rotating hero photographs: preload next photo and respect motion preferences. */
+(function fundosDoHero(){
+  const hero=document.getElementById('inicio');
+  const fotos=Array.from(hero.querySelectorAll('.hero-fundo'));
+  const botao=document.getElementById('pausarFundos');
+  if(fotos.length<2)return;
+  const movimento=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let pausado=movimento.matches,visivel=false,atual=0,timer=null,geracao=0;
+  function carregar(foto){
+    if(foto.dataset.src){foto.src=foto.dataset.src;delete foto.dataset.src;}
+    return foto.decode();
+  }
+  function proxima(){return (atual+1)%fotos.length;}
+  function permitido(){return !pausado&&visivel&&!document.hidden;}
+  function atualizarBotao(){
+    botao.querySelector('span').textContent=pausado?'Reproduzir imagens':'Pausar imagens';
+    botao.setAttribute('aria-label',pausado?'Reproduzir troca de imagens de fundo':'Pausar troca de imagens de fundo');
+    botao.querySelector('path').setAttribute('d',pausado?'M4 2l9 6-9 6z':'M4 3h3v10H4zM9 3h3v10H9z');
+  }
+  function agendar(){
+    clearTimeout(timer);geracao++;
+    if(!permitido())return;
+    const versao=geracao;
+    carregar(fotos[proxima()]).catch(function(){});
+    timer=setTimeout(async function(){
+      const seguinte=proxima();
+      try{
+        await carregar(fotos[seguinte]);
+        if(!permitido()||versao!==geracao)return;
+        fotos[atual].classList.remove('ativo');
+        fotos[seguinte].classList.add('ativo');
+        atual=seguinte;
+      }catch(error){/* Keep the current photograph if the next one cannot load. */}
+      if(versao===geracao)agendar();
+    },6000);
+  }
+  botao.hidden=false;atualizarBotao();
+  botao.addEventListener('click',function(){pausado=!pausado;atualizarBotao();agendar();});
+  movimento.addEventListener('change',function(){pausado=movimento.matches;atualizarBotao();agendar();});
+  document.addEventListener('visibilitychange',agendar);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entradas){visivel=entradas[0].isIntersecting;agendar();}).observe(hero);
+  }else{visivel=true;agendar();}
+})();
+
 </script>
 
 </body>
